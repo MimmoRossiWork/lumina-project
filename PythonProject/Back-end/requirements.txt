@@ -4,4 +4,7 @@ motor
 bcrypt
 python-dotenv
 pydantic
-
+pandas
+joblib
+dnspython
+email-validator
