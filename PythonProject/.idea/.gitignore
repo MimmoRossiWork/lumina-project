@@ -8,3 +8,23 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
+# environment variables
+.env
+
+# python virtual environments
+venv/
+.venv/
+
+# python cache
+__pycache__/
+*.pyc
+
+# node modules
+node_modules/
+
+# build files
+dist/
+
+.env
+PythonProject/Back-end/.env

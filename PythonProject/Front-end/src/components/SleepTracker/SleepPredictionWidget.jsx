@@ -22,7 +22,7 @@ export default function SleepPredictionWidget({ userId }) {
     const fetchPrediction = async () => {
       try {
         // Chiama il tuo endpoint
-        const res = await axios.get(`http://localhost:8000/api/v1/predict/sleep-risk/${userId}`)
+        const res = await axios.get(`https://lumina-project-b1a9.onrender.com/api/v1/predict/sleep-risk/${userId}`)
         setPrediction(res.data)
       } catch (error) {
         console.error("Errore fetch predizione sonno:", error)
