@@ -67,4 +67,6 @@ async def startup_event():
 
 @app.get("/")
 async def root():
+    import os
+    print("DEBUG URI:", os.getenv("MONGODB_URI"))
     return {"status": "ok"}

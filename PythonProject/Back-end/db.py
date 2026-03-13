@@ -1,10 +1,12 @@
-import motor.motor_asyncio
-from config import MONGODB_URI, MONGODB_DB
+import os
+from motor.motor_asyncio import AsyncIOMotorClient
 
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URI)
-# explicitly select DB from env/config
-db = client[MONGODB_DB]
+MONGODB_URI = os.getenv("MONGODB_URI")
 
+client = AsyncIOMotorClient(MONGODB_URI)
+
+db = client.get_default_database()
 # helper if code expects get_collection from db
 def get_collection(name: str):
     return db.get_collection(name)
+
