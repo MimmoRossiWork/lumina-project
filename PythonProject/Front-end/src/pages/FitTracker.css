@@ -1,0 +1,1020 @@
+/* ================================================
+   FitTracker.css - Design System Organic/Warm
+   Basato sul design system definito in Login.css
+   ================================================ */
+
+/* ===== 1. VARIABILI CSS (Design System) ===== */
+:root {
+  --bg-warm: #F5E6D3;
+  --surface-white: #FFFFFF;
+  --primary-green: #059669;
+  --text-dark: #292524;
+  --text-secondary: #57534E;
+  --input-bg: #FAFAF9;
+  --border-light: rgba(87, 83, 78, 0.15);
+  --placeholder-color: #A8A29E;
+  --radius-card: 24px;
+  --radius-input: 12px;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ===== 2. LAYOUT PRINCIPALE ===== */
+.fit-root {
+  min-height: 100vh;
+  padding: 8px 28px;
+  margin-top: -60px;
+  background-color: var(--bg-warm);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+}
+
+/* Header con titolo e data - CENTRATO */
+.fit-header {
+  margin-bottom: 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fit-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.fit-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.fit-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Grid Layout Responsive */
+.fit-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Desktop: 2 colonne affiancate + results sotto che copre entrambe */
+@media (min-width: 768px) {
+  .fit-main {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .steps-card {
+    grid-column: 1 / 2;
+    grid-row: 1;
+  }
+
+  .activity-card {
+    grid-column: 2 / 3;
+    grid-row: 1;
+  }
+
+  .results-card {
+    grid-column: 1 / 3;
+    grid-row: 2;
+  }
+}
+
+/* Mobile: tutto in colonna */
+@media (max-width: 767px) {
+  .fit-root {
+    padding: 6px 16px;
+  }
+
+  .fit-header h1 {
+    font-size: 32px;
+  }
+}
+
+/* ===== 3. COMPONENTI CARD ===== */
+.card {
+  background-color: var(--surface-white);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  box-shadow: 0 20px 60px rgba(120, 113, 108, 0.15),
+              0 4px 12px rgba(120, 113, 108, 0.08);
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1),
+              box-shadow 220ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 70px rgba(120, 113, 108, 0.2),
+              0 6px 16px rgba(120, 113, 108, 0.12);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Steps Card - Bianca con pulsanti neri */
+.steps-card {
+  background-color: #FFFFFF !important;
+}
+
+.steps-card .stepper-btn {
+  background-color: #292524 !important;
+  border-color: #292524 !important;
+  color: #FFFFFF !important;
+}
+
+.steps-card .stepper-btn:hover {
+  background-color: #1c1917 !important;
+  border-color: #1c1917 !important;
+  box-shadow: 0 4px 12px rgba(41, 37, 36, 0.25) !important;
+}
+
+.steps-card .stepper-symbol {
+  color: #FFFFFF !important;
+}
+
+/* Input nel blocco conta passi - bordo nero sottile, ombra e testo nero */
+.steps-card .stepper input[type="text"],
+.steps-card .stepper input[type="number"],
+.steps-card .field input[type="text"],
+.steps-card .field input[type="number"] {
+  border: 1px solid #292524 !important;
+  color: #292524 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(41, 37, 36, 0.15) !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Placeholder nero per gli input della steps-card */
+.steps-card .stepper input::placeholder,
+.steps-card .field input::placeholder {
+  color: #292524 !important;
+  opacity: 0.6 !important;
+}
+
+.steps-card .stepper input:focus,
+.steps-card .field input:focus {
+  border-color: #1c1917 !important;
+  box-shadow: 0 4px 16px rgba(41, 37, 36, 0.25) !important;
+  background-color: #FFFFFF !important;
+  color: #292524 !important;
+}
+
+/* Ensure Reset button is visible even if global .btn rules exist */
+.steps-card .btn {
+  display: inline-block !important;
+  background: var(--primary-green) !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  margin-top: 8px !important;
+  cursor: pointer !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 18px rgba(5,150,105,0.12) !important;
+  z-index: 2 !important;
+}
+
+.steps-card .btn.small {
+  padding: 6px 8px !important;
+  font-size: 0.85rem !important;
+}
+
+.steps-card .btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Extra strong rule for the reset button to ensure visibility */
+#reset-steps-btn, button[data-testid="reset-steps"] {
+  display: inline-block !important;
+  background: linear-gradient(90deg, #059669, #10b981) !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 10px 12px !important;
+  border-radius: 10px !important;
+  margin-top: 10px !important;
+  cursor: pointer !important;
+  font-weight: 800 !important;
+  box-shadow: 0 10px 30px rgba(5,150,105,0.14) !important;
+  z-index: 50 !important;
+}
+
+@media (max-width: 480px) {
+  #reset-steps-btn, button[data-testid="reset-steps"] {
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
+/* Activity Card - Bianca con pulsanti neri */
+.activity-card {
+  background-color: #FFFFFF !important;
+  padding: 20px 24px !important;
+}
+
+.activity-card .stepper-btn {
+  background-color: #292524 !important;
+  border-color: #292524 !important;
+  color: #FFFFFF !important;
+}
+
+.activity-card .stepper-btn:hover {
+  background-color: #1c1917 !important;
+  border-color: #1c1917 !important;
+  box-shadow: 0 4px 12px rgba(41, 37, 36, 0.25) !important;
+}
+
+.activity-card .stepper-symbol {
+  color: #FFFFFF !important;
+}
+
+/* Input e select nel blocco attività - bordo nero sottile, ombra e testo nero */
+.activity-card .stepper input[type="text"],
+.activity-card .stepper input[type="number"],
+.activity-card .field input[type="text"],
+.activity-card .field input[type="number"] {
+  border: 1px solid #292524 !important;
+  color: #292524 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(41, 37, 36, 0.15) !important;
+  background-color: #FFFFFF !important;
+}
+
+.activity-card .stepper input::placeholder,
+.activity-card .field input::placeholder {
+  color: #292524 !important;
+  opacity: 0.6 !important;
+}
+
+.activity-card .stepper input:focus,
+.activity-card .field input:focus {
+  border-color: #1c1917 !important;
+  box-shadow: 0 4px 16px rgba(41, 37, 36, 0.25) !important;
+  background-color: #FFFFFF !important;
+  color: #292524 !important;
+}
+
+/* Custom select nella activity-card con bordo nero */
+.activity-card .custom-select-trigger {
+  border: 1px solid #292524 !important;
+  color: #292524 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(41, 37, 36, 0.15) !important;
+  background-color: #FFFFFF !important;
+}
+
+.activity-card .custom-select-trigger:hover {
+  background-color: #FAFAF9 !important;
+}
+
+.activity-card .custom-select-trigger:focus {
+  border-color: #1c1917 !important;
+  box-shadow: 0 4px 16px rgba(41, 37, 36, 0.25) !important;
+}
+
+.activity-card .custom-caret {
+  color: #292524 !important;
+}
+
+/* Results Card - Bianca */
+.results-card {
+  background-color: #FFFFFF !important;
+}
+
+/* Responsive card padding */
+@media (max-width: 767px) {
+  .card {
+    padding: 20px 18px;
+  }
+}
+
+/* ===== 4. FORM CONTROLS (Input, Select, Stepper) ===== */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.field > span {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Input base style (seguendo Login.css) */
+.field input[type="text"],
+.field input[type="number"],
+.stepper input[type="text"],
+.stepper input[type="number"] {
+  padding: 12px 16px;
+  border-radius: var(--radius-input);
+  border: 1px solid var(--border-light);
+  background-color: var(--input-bg);
+  color: var(--text-dark);
+  font-size: 15px;
+  outline: none;
+  transition: all 120ms ease;
+  font-family: var(--font-sans);
+  text-align: center;
+}
+
+.field input::placeholder {
+  color: var(--placeholder-color);
+}
+
+.field input:focus,
+.stepper input:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+  background-color: var(--surface-white);
+}
+
+/* Rimuovi spinner nativi */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ===== STEPPER BUTTONS ===== */
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.stepper-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--surface-white);
+  border: 1.5px solid var(--border-light);
+  color: var(--primary-green);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 120ms ease;
+  position: relative;
+}
+
+.stepper-btn:hover {
+  background-color: rgba(5, 150, 105, 0.05);
+  border-color: var(--primary-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);
+}
+
+.stepper-btn:active {
+  transform: translateY(0);
+}
+
+.stepper-btn svg {
+  display: none;
+}
+
+.stepper-symbol {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+  color: var(--primary-green);
+  pointer-events: none;
+}
+
+.stepper input {
+  min-width: 140px;
+  width: 58%;
+  max-width: 240px;
+  text-align: center;
+}
+
+/* Mobile stepper */
+@media (max-width: 480px) {
+  .stepper {
+    max-width: 100%;
+    gap: 8px;
+  }
+
+  .stepper input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .stepper-btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ===== CUSTOM SELECT ===== */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-input);
+  border: 1px solid var(--border-light);
+  background-color: var(--input-bg);
+  color: var(--text-dark);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 120ms ease;
+  font-family: var(--font-sans);
+}
+
+.custom-select-trigger:hover {
+  background-color: var(--surface-white);
+}
+
+.custom-select-trigger:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+.custom-select-value {
+  flex: 1;
+  text-align: left;
+}
+
+.custom-caret {
+  margin-left: 8px;
+  transition: transform 180ms ease;
+  color: var(--text-secondary);
+}
+
+.custom-caret.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Options */
+.custom-options {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  margin-top: 8px;
+  background-color: var(--surface-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-input);
+  box-shadow: 0 20px 60px rgba(120, 113, 108, 0.15),
+              0 4px 12px rgba(120, 113, 108, 0.08);
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 6px;
+  list-style: none;
+}
+
+.custom-options.open {
+  animation: dropdownIn 180ms cubic-bezier(.2,.9,.3,1) forwards;
+}
+
+.custom-options.closing {
+  animation: dropdownOut 180ms cubic-bezier(.2,.9,.3,1) forwards;
+  pointer-events: none;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.custom-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.custom-option:hover,
+.custom-option.highlight {
+  background-color: rgba(5, 150, 105, 0.08);
+}
+
+.custom-option.selected {
+  background-color: rgba(5, 150, 105, 0.12);
+  font-weight: 600;
+  color: var(--primary-green);
+}
+
+/* ===== 5. PROGRESS BAR ===== */
+.progress-wrap {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 420px;
+  height: 12px;
+  background-color: rgba(87, 83, 78, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(87, 83, 78, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-green), #10b981);
+  border-radius: 999px;
+  transition: width 450ms cubic-bezier(.2,.9,.3,1);
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pulse animation quando vicino all'obiettivo */
+.progress-fill.pulse {
+  animation: progressPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes progressPulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(5, 150, 105, 0.5);
+  }
+}
+
+/* Shimmer effect */
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  left: -40%;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent);
+  transform: skewX(-12deg);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.progress-fill.pulse::after {
+  animation: shimmer 900ms linear infinite;
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  from {
+    transform: skewX(-12deg) translateX(-100%);
+  }
+  to {
+    transform: skewX(-12deg) translateX(220%);
+  }
+}
+
+.progress-meta {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 0;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Reset button wrap */
+.reset-wrap {
+  margin-top: 6px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ===== DISTANZA E CALCOLI ===== */
+.distance {
+  margin-bottom: 8px;
+  color: var(--text-dark);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.distance strong {
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+.calcs {
+  margin-top: 14px;
+  color: var(--text-dark);
+}
+
+.calcs > div {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.calcs strong {
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+/* ===== MOTIVATION MESSAGE ===== */
+.motivation {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background-color: rgba(5, 150, 105, 0.08);
+  border-left: 3px solid var(--primary-green);
+  border-radius: 8px;
+  font-style: italic;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.motivation.fade-in {
+  animation: motivIn 420ms ease forwards;
+}
+
+@keyframes motivIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESULTS CARD ===== */
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(87, 83, 78, 0.1);
+  font-size: 15px;
+  color: var(--text-dark);
+}
+
+.result-row:last-of-type {
+  border-bottom: none;
+}
+
+.result-row strong {
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+.results-card hr {
+  border: none;
+  border-top: 1px solid rgba(87, 83, 78, 0.1);
+  margin: 16px 0;
+}
+
+.result-total {
+  margin-top: 20px;
+  padding: 16px;
+  background: linear-gradient(135deg,
+    rgba(5, 150, 105, 0.1),
+    rgba(16, 185, 129, 0.08));
+  border-radius: var(--radius-input);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+  box-shadow: inset 0 -2px 8px rgba(5, 150, 105, 0.1);
+}
+
+.result-total strong {
+  color: var(--primary-green);
+  font-size: 24px;
+}
+
+/* Flash animation per totali */
+.result-total.flash {
+  animation: totalFlash 700ms cubic-bezier(.2,.9,.3,1);
+}
+
+@keyframes totalFlash {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(5, 150, 105, 0.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Count-up animation */
+.count-up {
+  display: inline-block;
+  transition: transform 360ms cubic-bezier(.2,.9,.3,1);
+}
+
+.count-up.flash {
+  animation: countFlash 520ms cubic-bezier(.2,.9,.3,1);
+}
+
+@keyframes countFlash {
+  0%, 100% {
+    transform: scale(1);
+    color: inherit;
+  }
+  40% {
+    transform: scale(1.12);
+    color: var(--primary-green);
+  }
+}
+
+/* ===== 6. ECG ANIMATION (SVG) ===== */
+.ecg-heading {
+  position: relative;
+  display: inline-block;
+  line-height: 1.1;
+  cursor: default;
+  padding-bottom: 18px;
+}
+
+.heading-text {
+  position: relative;
+  z-index: 3;
+}
+
+.ecg-svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 14px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.ecg-path {
+  stroke: var(--primary-green);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-width: 2;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 0;
+  animation: ecgMove 1800ms linear infinite;
+  opacity: 0.95;
+}
+
+@keyframes ecgMove {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: 200;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ecg-heading.active .ecg-path {
+  animation: ecgMoveActive 1400ms linear infinite;
+}
+
+@keyframes ecgMoveActive {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: 260;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ecg-heart {
+  position: absolute;
+  right: 8px;
+  top: -8px;
+  z-index: 4;
+  color: var(--primary-green);
+}
+
+/* ECG Runner (omino che corre) */
+.ecg-runner {
+  position: absolute;
+  left: 0;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  color: var(--primary-green);
+  z-index: 4;
+  opacity: 0;
+  transition: transform 1100ms cubic-bezier(.2,.9,.3,1),
+              opacity 260ms ease;
+}
+
+.ecg-heading:hover .ecg-runner,
+.ecg-heading.active .ecg-runner {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .ecg-runner {
+    top: -6px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ===== ACCESSIBILITY & REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover,
+  .progress-fill,
+  .progress-fill.pulse,
+  .progress-fill.pulse::after,
+  .custom-options.open,
+  .custom-options.closing,
+  .motivation.fade-in,
+  .count-up.flash,
+  .result-total.flash,
+  .ecg-path,
+  .ecg-heading.active .ecg-path,
+  .ecg-runner {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .ecg-runner {
+    opacity: 0 !important;
+  }
+}
+
+/* Focus visibile per accessibilità */
+.stepper-btn:focus-visible,
+.custom-select-trigger:focus-visible,
+.field input:focus-visible {
+  outline: 3px solid rgba(5, 150, 105, 0.3);
+  outline-offset: 2px;
+}
+
+/* ===== RESPONSIVE FINAL ADJUSTMENTS ===== */
+@media (max-width: 480px) {
+  .fit-header h1 {
+    font-size: 24px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .result-total {
+    font-size: 18px;
+  }
+
+  .result-total strong {
+    font-size: 20px;
+  }
+}
+
+/* Card entrance animation */
+.card {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: cardIn 420ms ease forwards;
+}
+
+@keyframes cardIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tweak field layout in steps-card: center elements and constrain widths for neat alignment */
+.steps-card .field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: center; /* center label and stepper */
+}
+
+/* Make the label span centered and use full width up to a max so text lines up with progress */
+.steps-card .field > span {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+/* Center the stepper and limit its overall width so inputs and buttons align with the progress bar */
+.steps-card .stepper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px; /* same width as progress bar for consistent alignment */
+  margin: 0 auto;
+}
+
+/* Make sure the numeric input visually centers inside the stepper */
+.steps-card .stepper input {
+  min-width: 140px;
+  width: 58%;
+  max-width: 240px;
+  text-align: center;
+}
+
+/* Slightly increase spacing between distance and progress so reset button has breathing room */
+.steps-card .distance {
+  margin-bottom: 8px;
+}
+
+/* Reset-wrap spacing tweak */
+.reset-wrap {
+  margin-top: 6px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Ensure reset button visual balance under the progress meta */
+#reset-steps-btn, button[data-testid="reset-steps"] {
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  font-size: 0.95rem !important;
+  min-width: 120px;
+}

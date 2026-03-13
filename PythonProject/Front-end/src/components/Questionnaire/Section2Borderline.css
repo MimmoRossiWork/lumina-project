@@ -1,0 +1,8 @@
+.questionnaire-form.borderline { display: flex; flex-direction: column; gap: 12px; }
+.questionnaire-form.borderline .form-row { display: flex; flex-direction: column; gap: 6px; }
+.questionnaire-form.borderline .question-label { font-weight: 600; }
+.questionnaire-form.borderline .form-actions { display: flex; justify-content: space-between; margin-top: 12px; }
+
+/* make scale selector centered */
+.questionnaire-form.borderline .scale-selector { display: flex; justify-content: center; }
+

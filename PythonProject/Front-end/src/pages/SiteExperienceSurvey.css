@@ -1,0 +1,63 @@
+.survey-box { padding: 36px; }
+
+/* adattamenti per radio specifiche del sondaggio */
+.survey-box .radio-option { min-width: 48px; justify-content: center; }
+.survey-box .radio-label { font-weight: 700; color: inherit; }
+
+/* rendi i numeri 1 e 5 più distinti */
+.survey-box .radio-option:first-child .radio-label { opacity: 0.95; }
+.survey-box .radio-option:last-child .radio-label { opacity: 0.95; }
+
+/* compact results pre formatting */
+.survey-box pre { background: rgba(0,0,0,0.02); padding: 12px; border-radius: 8px; overflow: auto; }
+
+/* mobile tweaks */
+@media (max-width: 640px) {
+  .survey-box { padding: 18px; }
+  .radio-row { gap: 8px; }
+}
+
+/* Specific button styles for Site Experience Survey (override global styles only for this page) */
+.survey-box .form-actions .btn-secondary,
+.survey-box .btn-secondary {
+  background: #000000; /* black */
+  color: #ffffff; /* white text */
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 120ms ease;
+}
+.survey-box .form-actions .btn-secondary:hover,
+.survey-box .btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  background-color: #111111;
+}
+.survey-box .form-actions .btn-secondary:disabled,
+.survey-box .btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(0,0,0,0.06);
+  color: rgba(255,255,255,0.6);
+}
+
+.survey-box .form-actions .btn-primary,
+.survey-box .btn-primary {
+  background: var(--primary-green, #10b981);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.survey-box .form-actions .btn-primary:hover,
+.survey-box .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(5,150,105,0.16);
+}

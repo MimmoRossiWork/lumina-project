@@ -1,0 +1,38 @@
+.questionnaire-form.clinical { display: flex; flex-direction: column; gap: 12px; }
+.questionnaire-form.clinical .form-row { display: flex; flex-direction: column; gap: 6px; }
+.questionnaire-form.clinical .question-label { font-weight: 600; }
+.questionnaire-form.clinical .form-actions { display: flex; justify-content: space-between; margin-top: 12px; }
+.clinical-result { margin-top: 10px; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); }
+.clinical-result .redflag { margin-top: 8px; color: #ffdede; background: linear-gradient(90deg,#ff7b7b,#ff3b3b); padding: 8px; border-radius: 6px; font-weight: 700; }
+
+/* modal styles */
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.modal {
+  width: 90%;
+  max-width: 560px;
+  background: #0b1220;
+  color: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.modal h3 { margin-top: 0; }
+.modal p { margin-bottom: 8px; line-height: 1.4; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+
+@media (max-width: 600px) {
+  .modal { padding: 14px; }
+  .modal-actions { justify-content: center; }
+}

@@ -1,0 +1,18 @@
+.section6-borderline { max-width:800px; margin:0 auto; padding:24px; background: var(--surface-white); border-radius:16px; border:1px solid rgba(var(--stone-border-rgba), 0.08); box-shadow: 0 8px 24px var(--warm-shadow); color: var(--text-main); }
+.section6-borderline .form-row{ display:flex; flex-direction:column; gap:8px; margin:12px 0 }
+.section6-borderline .question-label{ font-weight:700; font-size:15px; color: var(--text-main); }
+.section6-borderline .section-intro{ color: var(--text-secondary); margin-bottom:12px }
+.section6-borderline .form-actions{ display:flex; justify-content:space-between; margin-top:20px }
+.section6-borderline .error{ color: #DC2626; margin-top:8px; background: #FEE2E2; padding: 8px 12px; border-radius: 8px; border-left: 3px solid #DC2626; }
+
+/* ensure scale and labels inherit visible color */
+.section6-borderline .scale-label { color: var(--text-main); }
+.section6-borderline .scale-option { background: #FAFAF9; border: 1px solid rgba(var(--stone-border-rgba), 0.08); }
+
+/* responsive spacing: keep question above options on all sizes; only increase padding on wide screens */
+@media (min-width: 900px) {
+  .section6-borderline { padding:28px }
+  /* keep vertical layout: questions stay above scale options */
+  .section6-borderline .form-row{ flex-direction:column; align-items:flex-start }
+  .section6-borderline .question-label{ margin-bottom:8px }
+}

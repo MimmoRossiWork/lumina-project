@@ -1,0 +1,506 @@
+:root{
+  --bg: #0f172a;
+  --card: #0b1220;
+  --accent: #646cff;
+  --accent-2: #60a5fa;
+  --muted: rgba(255,255,255,0.06);
+  --text: rgba(255,255,255,0.9);
+}
+
+/* Design tokens / stile ispirato a FitTracker applicati solo alla pagina Wellbeing */
+.well-page, .wellbeing-page {
+  --bg-warm: #F5E6D3;
+  --surface-white: #FFFFFF;
+  --primary-green: #059669;
+  --text-dark: #292524;
+  --text-secondary: #57534E;
+  --input-bg: #FAFAF9;
+  --border-light: rgba(87,83,78,0.15);
+  --placeholder-color: #A8A29E;
+  --radius-card: 24px;
+  --radius-input: 12px;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  font-family: var(--font-sans), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.well-page, .wellbeing-page { color:var(--text); padding: 1rem; max-width:1000px; margin: 0 auto }
+.well-header{ display:flex; justify-content:space-between; align-items:center; text-align:center }
+.sos-btn{ background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:700 }
+
+/* Stile SOS verde ispirato a FitTracker */
+.sos-btn {
+  background: linear-gradient(90deg, var(--primary-green), #047857);
+  color: #ffffff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(5,150,105,0.12);
+}
+.sos-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(5,150,105,0.18); }
+.sos-btn:active { transform: translateY(0); }
+
+/* Quando il modal SOS è aperto: usa sfondo chiaro (come le card) e testi scuri */
+.sos-content{
+  position:relative;
+  z-index:2100;
+  background: var(--surface-white);
+  color: var(--text-dark);
+  border-radius:16px;
+  padding:24px;
+  width: min(720px, 96%);
+  max-height:90vh;
+  overflow:auto;
+  box-shadow: 0 20px 60px rgba(120,113,108,0.15), 0 4px 12px rgba(120,113,108,0.08);
+}
+
+.sos-close{ position:absolute; right:10px; top:10px; background:transparent; border:none; font-size:18px; color:var(--text-dark) }
+
+.card{ background: var(--card); border-radius:12px; padding:16px; margin-top:14px }
+
+/* Card base style per Wellbeing (ispirato a .card in FitTracker) */
+.well-page .card, .wellbeing-page .card {
+  background-color: var(--surface-white);
+  color: var(--text-dark);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  box-shadow: 0 20px 60px rgba(120,113,108,0.15), 0 4px 12px rgba(120,113,108,0.08);
+}
+
+/* Applica aspetti specifici ai blocchi richiesti (Diario minimal e Quiz) */
+.gratitudine.card,
+.quiz.card {
+  /* usa il card base sopra; sovrascrive padding/colore se precedentemente impostato */
+  background-color: var(--surface-white);
+  color: var(--text-dark);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(120,113,108,0.12), 0 4px 12px rgba(120,113,108,0.06);
+}
+
+.mood-row{ display:flex; gap:8px; }
+.mood-btn{ background:transparent; border:1px solid var(--muted); padding:8px 10px; border-radius:8px; cursor:pointer; font-size:18px }
+.mood-btn.active{ background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; border-color: transparent }
+
+/* Override definitivo: assicurati che i mood buttons nella pagina Wellbeing siano sempre leggibili */
+.well-page .mood-btn, .wellbeing-page .mood-btn {
+  color: var(--text-dark) !important;
+  background: transparent !important;
+  border: 1px solid rgba(41,37,36,0.08) !important;
+  box-shadow: none !important;
+}
+
+.well-page .mood-btn.active, .wellbeing-page .mood-btn.active {
+  background: var(--surface-white) !important;
+  color: var(--text-dark) !important;
+  border-color: rgba(41,37,36,0.12) !important;
+  box-shadow: 0 8px 20px rgba(41,37,36,0.06) !important;
+}
+
+.well-page .mood-btn .emoji, .wellbeing-page .mood-btn .emoji {
+  color: var(--text-dark) !important;
+  font-size: 20px !important;
+}
+
+.gratitudine-rows{ display:flex; gap:8px; }
+.gratitudine-rows input{ background: rgba(255,255,255,0.02); border:1px solid var(--muted); color:var(--text); padding:10px; border-radius:12px; min-width:0; flex:1; font-size:14px }
+.saved-msg{ margin-left:12px; color:#86efac }
+.week-history{ display:none } /* rimosso storico settimanale per layout minimal richiesto */
+
+/* minimal calendar */
+.calendar-joy{ display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; align-items:center; padding:6px }
+.day-cell{ width:36px; height:36px; display:flex; align-items:center; justify-content:center; cursor:pointer; border-radius:999px; transition: transform 180ms ease, box-shadow 180ms ease }
+.day-cell .day-dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,0.06); box-shadow: none; transition: background 200ms ease, transform 200ms ease }
+.day-cell.empty .day-dot{ background: rgba(255,255,255,0.03) }
+.day-cell.filled .day-dot{ background: linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow: 0 6px 20px rgba(100,108,255,0.18); transform: scale(1.05) }
+.day-cell.today{ outline: 2px solid rgba(255,255,255,0.06) }
+.day-cell.selected{ transform: translateY(-4px); }
+.day-cell .day-num{ color:var(--text); font-size:13px; line-height:1; }
+.day-cell.filled{ box-shadow: 0 6px 20px rgba(100,108,255,0.08); }
+
+/* Calendar within white cards: ensure contrast */
+.gratitudine.card .calendar-joy,
+.quiz.card .calendar-joy {
+  background: transparent;
+  gap: 10px;
+  padding: 8px;
+}
+
+.gratitudine.card .day-cell,
+.quiz.card .day-cell {
+  background: transparent;
+  width:40px; height:40px;
+}
+
+.gratitudine.card .day-cell .day-num,
+.quiz.card .day-cell .day-num,
+.calendar-joy .day-num {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Dots keep accent but with subtler shadow */
+.day-cell .day-dot{ box-shadow:none; }
+.day-cell.filled .day-dot{ background: linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow: 0 6px 18px rgba(100,108,255,0.14); }
+
+/* make quiz and plan slightly more compact */
+.quiz-row{ display:flex; align-items:center; gap:8px; margin-top:6px }
+.quiz-row label{ min-width:180px; font-size:14px }
+.quiz-row input[type='range']{ flex:1 }
+.range-val{ width:40px; color: var(--text-dark); font-weight:700 }
+
+.plan-layout{ display:flex; gap:12px; align-items:flex-start }
+.plan-grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(140px,1fr)); gap:8px; margin-top:10px }
+.plan-grid-col{ flex:1 }
+.plan-sidebar{ width:220px; background: var(--surface-white); border-radius: 12px; padding: 14px; }
+.plan-card{ background: var(--surface-white); border-radius: 12px; padding:10px; box-shadow: 0 8px 20px rgba(120,113,108,0.06); }
+.plan-detail{ background: var(--surface-white); padding:12px; border-radius:8px; box-shadow: 0 8px 18px rgba(120,113,108,0.06); }
+
+.plan-card.excluded{ opacity:0.6; filter: grayscale(20%); }
+
+/* SOS modal styles */
+.sos-modal{ position:fixed; inset:0; z-index:2000; display:flex; align-items:center; justify-content:center }
+.sos-overlay{ position:absolute; inset:0; background:rgba(0,0,0,0.6) }
+.sos-content{ position:relative; z-index:2100; background: var(--surface-white); color: var(--text-dark); border-radius:16px; padding:24px; width: min(720px, 96%); max-height:90vh; overflow:auto; box-shadow: 0 20px 60px rgba(120,113,108,0.15), 0 4px 12px rgba(120,113,108,0.08); }
+.sos-close{ position:absolute; right:10px; top:10px; background:transparent; border:none; font-size:18px; color:var(--text-dark) }
+
+.box-breathing{ display:flex; flex-direction:column; align-items:center }
+/* unify existing class .bb-circle with the JSX class .breathing-circle and add phase-based scaling */
+.bb-circle, .breathing-circle {
+  width:120px;
+  height:120px;
+  border-radius:999px;
+  background: radial-gradient(circle at 30% 30%, rgba(96,165,250,0.95), rgba(100,108,255,0.6));
+  box-shadow:0 8px 30px rgba(96,165,250,0.12);
+  transition: transform 300ms cubic-bezier(.22,.9,.32,1), box-shadow 200ms ease;
+  transform: scale(1);
+}
+/* gentle scaling for inhale / hold / exhale phases (data-phase from 0 to 3) */
+.breathing-circle[data-phase="0"] { transform: scale(1.12); }
+.breathing-circle[data-phase="1"] { transform: scale(1.05); }
+.breathing-circle[data-phase="2"] { transform: scale(0.88); }
+.breathing-circle[data-phase="3"] { transform: scale(0.95); }
+
+/* label mapping */
+.bb-label, .breathing-label { margin-top:12px; color:var(--text-dark); font-weight:700 }
+
+/* diary modal */
+.diary-modal{ position:fixed; inset:0; z-index:3000; display:flex; align-items:center; justify-content:center }
+.diary-overlay{ position:absolute; inset:0; background:rgba(0,0,0,0.5) }
+.diary-content{ position:relative; z-index:3100; width: min(520px, 96%); background: linear-gradient(180deg, rgba(11,17,32,0.98), rgba(15,23,42,0.98)); border-radius:12px; padding:18px; box-shadow: 0 18px 40px rgba(2,6,23,0.6); transition: transform 180ms ease, opacity 180ms ease; }
+.diary-close{ position:absolute; right:10px; top:10px; background:transparent; border:none; font-size:18px; color:var(--text) }
+.diary-content textarea{ width:100%; min-height:100px; max-height:220px; resize:vertical; background: rgba(255,255,255,0.02); border:1px solid var(--muted); color:var(--text); padding:10px; border-radius:8px }
+
+/* Diary modal styled like FitTracker modal */
+.diary-content {
+  background: var(--surface-white) !important;
+  color: var(--text-dark);
+  box-shadow: 0 20px 60px rgba(120,113,108,0.15), 0 4px 12px rgba(120,113,108,0.08);
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.diary-content textarea{
+  background: var(--input-bg) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid var(--border-light);
+  padding: 12px;
+  border-radius: var(--radius-input);
+}
+
+/* ensure joy modal z-index is above toast */
+.joy-modal{ z-index:4000 }
+
+/* plan X button */
+.plan-x{ background: transparent; border: 1px solid var(--border-light); color: var(--text-dark); padding:6px 8px; border-radius:8px }
+.plan-x.done{ background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; border-color: transparent }
+
+/* small responsive tweaks */
+@media (max-width:600px){ .quiz-row label{ min-width:140px } }
+
+/* Overrides per rendere i blocchi Diario minimal, calendario e Quiz bianchi con testo nero
+   (ispirati allo stile di FitTracker: sfondo bianco, testo scuro, ombra leggera) */
+
+/* Assicura che i numeri dei giorni nel calendario siano scuri quando il contenitore è bianco */
+.gratitudine.card .calendar-joy .day-cell .day-num,
+.quiz.card .calendar-joy .day-cell .day-num,
+.calendar-joy .day-num {
+  color: #222222;
+}
+
+/* If the calendar grid itself needs a light surface (keeps dots but ensures contrast) */
+.gratitudine.card .calendar-joy,
+.quiz.card .calendar-joy {
+  background: transparent;
+}
+
+/* Plan section cards */
+.plan-sidebar{ background: var(--surface-white); border-radius: 12px; padding: 14px; width:220px }
+.plan-card{ background: var(--surface-white); border-radius: 12px; padding:10px; box-shadow: 0 8px 20px rgba(120,113,108,0.06); }
+.plan-detail{ background: var(--surface-white); padding:12px; border-radius:8px; box-shadow: 0 8px 18px rgba(120,113,108,0.06); }
+
+.plan-card.excluded{ opacity:0.6; filter: grayscale(20%); }
+
+/* Assicura che label e valori del quiz siano scuri */
+.quiz-row label,
+.range-val {
+  color: #222222;
+}
+
+/* Pulsanti all'interno dei blocchi chiari: testo scuro su sfondo bianco usa bordo scuro quando necessario */
+.gratitudine.card .btn,
+.quiz.card .btn,
+.plan-sidebar .btn,
+.diary-content .btn {
+  background: var(--text-dark);
+  color: #fff;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight:700;
+}
+
+/* Assicura che tutti i testi dentro il modal SOS siano scuri (override regole scure presenti altrove) */
+.sos-content, .sos-content * {
+  color: var(--text-dark) !important;
+}
+
+/* Inputs e checkbox dentro SOS: testo scuro e sfondo chiaro per leggibilità */
+.sos-content input,
+.sos-content textarea,
+.sos-content label {
+  color: var(--text-dark) !important;
+}
+.sos-content input[type="checkbox"] { accent-color: var(--primary-green); }
+
+/* Mood buttons: quando attivo mostra testo scuro (emoticon nere) */
+.mood-btn.active{
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color: var(--text-dark) !important;
+  border-color: transparent;
+}
+
+/* Mood buttons: assicurati che le emoticon e il testo siano sempre visibili (nere) dentro le card chiare */
+.mood-section .mood-row .mood-btn,
+.well-page .card .mood-row .mood-btn {
+  color: var(--text-dark) !important;
+  background: transparent !important;
+  border: 1px solid rgba(41,37,36,0.08) !important;
+  box-shadow: none !important;
+}
+
+/* Stato attivo: sfondo chiaro e emoji/testo neri per alto contrasto (come richiesto) */
+.mood-section .mood-row .mood-btn.active,
+.well-page .card .mood-row .mood-btn.active {
+  background: var(--surface-white) !important;
+  color: var(--text-dark) !important;
+  border-color: rgba(41,37,36,0.12) !important;
+  box-shadow: 0 8px 20px rgba(41,37,36,0.06) !important;
+}
+
+/* Forza anche la colorazione dell'emoji stessa (in caso di componenti che non ereditino) */
+.mood-section .mood-row .mood-btn .emoji,
+.well-page .card .mood-row .mood-btn .emoji {
+  color: var(--text-dark) !important;
+  font-size: 20px;
+}
+
+/* Final fix: remove browser blue focus ring / rectangular frame on mood buttons entirely
+   Keep the green shadow/visual but avoid the default blue rectangle. */
+.well-page .mood-row .mood-btn:focus,
+.well-page .mood-row .mood-btn:focus-visible,
+.well-page .mood-row .mood-btn:active {
+  outline: none !important;            /* remove UA outline */
+  -webkit-focus-ring-color: transparent !important;
+  -webkit-box-shadow: 0 14px 30px rgba(5,150,105,0.18) !important;
+  box-shadow: 0 14px 30px rgba(5,150,105,0.18) !important; /* green shadow */
+  border: none !important;             /* remove any visible border/frame */
+  background-clip: padding-box !important; /* ensure shadow follows rounded corners */
+}
+
+/* Also remove any focus rectangle on inner elements */
+.well-page .mood-row .mood-btn *:focus { outline: none !important; }
+
+/* On mouse active, prevent blue highlight on some browsers */
+.well-page .mood-row .mood-btn::-moz-focus-inner { border: 0; }
+
+/* Mobile tap highlight */
+.well-page .mood-row .mood-btn { -webkit-tap-highlight-color: transparent; }
+
+/* Header: forza il titolo principale "Benessere Psicofisico" a colore nero scuro */
+.well-page .well-header h1 {
+  color: var(--text-dark) !important;
+  margin: 0;
+}
+
+/* Quiz range inputs: rendi la linea/track verde come il pulsante SOS e il thumb leggibile */
+.quiz.card input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Webkit track */
+.quiz.card input[type='range']::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary-green), #047857);
+}
+.quiz.card input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -5px; /* center the thumb vertically */
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--primary-green);
+  box-shadow: 0 4px 10px rgba(5,150,105,0.18);
+}
+
+/* Firefox track/thumb */
+.quiz.card input[type='range']::-moz-range-track {
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary-green), #047857);
+}
+.quiz.card input[type='range']::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--primary-green);
+  box-shadow: 0 4px 10px rgba(5,150,105,0.18);
+}
+
+/* Ensure focus state emphasizes green shadow (instead of default blue) */
+.quiz.card input[type='range']:focus {
+  outline: none;
+}
+.quiz.card input[type='range']:focus::-webkit-slider-runnable-track {
+  box-shadow: 0 6px 18px rgba(5,150,105,0.18) inset;
+}
+.quiz.card input[type='range']:focus::-moz-range-track {
+  box-shadow: 0 6px 18px rgba(5,150,105,0.18) inset;
+}
+
+/* small responsive tweak: slightly reduce thumb on very small screens */
+@media (max-width:420px) {
+  .quiz.card input[type='range']::-webkit-slider-thumb,
+  .quiz.card input[type='range']::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-width: 2px;
+  }
+}
+
+/* Better range styling: only the filled portion is green (SOS), unfilled is light gray.
+   Uses --range-percent (set inline on the input) to size the filled portion. Works on WebKit and Firefox. */
+.quiz.card input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary-green) 0% var(--range-percent), #E5E7EB var(--range-percent) 100%);
+  cursor: pointer;
+}
+
+/* WebKit: make track transparent (we use input background) and style thumb */
+.quiz.card input[type='range']::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 999px;
+  background: transparent;
+}
+.quiz.card input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px; /* center the thumb */
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--primary-green);
+  box-shadow: 0 4px 10px rgba(5,150,105,0.18);
+  position: relative;
+  z-index: 2;
+}
+
+/* Firefox: use progress/track pseudo-elements */
+.quiz.card input[type='range']::-moz-range-track {
+  height: 10px;
+  border-radius: 999px;
+  background: #E5E7EB;
+}
+.quiz.card input[type='range']::-moz-range-progress {
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary-green), #047857);
+}
+.quiz.card input[type='range']::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--primary-green);
+  box-shadow: 0 4px 10px rgba(5,150,105,0.18);
+}
+
+/* Focus state: emphasize green (no blue outline) */
+.quiz.card input[type='range']:focus { outline: none; }
+.quiz.card input[type='range']:focus { box-shadow: 0 0 0 4px rgba(5,150,105,0.06); }
+
+/* Fallback: if --range-percent is not set, show neutral (50%) */
+.quiz.card input[type='range'] { --range-percent: 50%; }
+
+/* End range filled styling */
+
+/* Forza il titolo della pagina Wellbeing a colore nero */
+.wellbeing-page h1 {
+  color: #000;
+}
+
+/* Emotion badge in calendar */
+.calendar-joy .day-cell { position: relative; }
+.calendar-joy .emotion-badge { position: absolute; right: -4px; top: -4px; width:14px; height:14px; border-radius:999px; box-shadow: 0 6px 14px rgba(0,0,0,0.08); border: 2px solid var(--surface-white); }
+
+/* Allow coloring the whole cell for stronger emphasis when emotion present */
+.calendar-joy .day-cell.emotion-joy { background: linear-gradient(90deg, #DFF6EC, #D1FAE5) !important; }
+.calendar-joy .day-cell.emotion-sadness { background: linear-gradient(90deg, #DCEBFF, #DBEAFE) !important; }
+.calendar-joy .day-cell.emotion-anger { background: linear-gradient(90deg, #FFE9E9, #FFE4E6) !important; }
+.calendar-joy .day-cell.emotion-fear { background: linear-gradient(90deg, #F3E8FF, #F5E9FF) !important; }
+
+/* Ensure the day number is readable on colored backgrounds */
+.calendar-joy .day-cell.emotion-joy .day-num,
+.calendar-joy .day-cell.emotion-sadness .day-num,
+.calendar-joy .day-cell.emotion-anger .day-num,
+.calendar-joy .day-cell.emotion-fear .day-num { color: #292524 !important; font-weight:700 }
+
+/* Emphasize badge border when on dark container */
+.calendar-joy .emotion-badge { border: 2px solid rgba(255,255,255,0.95) !important; }
+
+/* If calendar is inside white cards, use darker badge border for contrast */
+.gratitudine.card .calendar-joy .emotion-badge, .quiz.card .calendar-joy .emotion-badge { border-color: rgba(0,0,0,0.06) !important; }
+
+/* Slightly reduce gap to bring emoji badge closer */
+.calendar-joy { gap:6px }
+
+/* Ensure day-num sits on left so badge appears near it */
+.calendar-joy .day-num { position: relative; z-index: 2 }
+
+/* Adjust filled state contrast when emotion coloring used */
+.calendar-joy .day-cell.filled.emotion-joy .day-num,
+.calendar-joy .day-cell.filled.emotion-sadness .day-num,
+.calendar-joy .day-cell.filled.emotion-anger .day-num,
+.calendar-joy .day-cell.filled.emotion-fear .day-num { color: #292524 }
+
+/* make the day-cell slightly larger to accommodate badge */
+.calendar-joy .day-cell { width:40px; height:40px }
+
+/* Tweak selected state to keep badge visible */
+.calendar-joy .day-cell.selected { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.08) }

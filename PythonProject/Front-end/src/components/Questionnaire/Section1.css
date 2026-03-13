@@ -1,0 +1,838 @@
+/* Section1.css - palette Organic/Warm alignment */
+:root{
+  --radio-size:16px;
+  --radio-border: rgba(var(--stone-border-rgba),0.12);
+  --radio-checked-bg: var(--primary-green); /* verde smeraldo */
+  --radio-checked-dot: #ffffff;
+  --radio-unchecked-bg: #FAFAF9; /* sabbia chiarissimo */
+  --radio-hover: #f3f3f2; /* hover subtle */
+
+  /* progress bar specific colors (site palette) */
+  --progress-bg: var(--surface-white);
+  --progress-text: var(--text-main);
+  --progress-shadow: 0 6px 18px rgba(41,37,36,0.06);
+}
+
+.radio-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+.radio-item { display:flex; align-items:center; }
+.radio-input { position:absolute; opacity:0; width:0; height:0; pointer-events:none; }
+.radio-label-wrapper { display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none; padding:4px 8px; border-radius:10px; transition: background var(--dur) var(--timing), transform var(--dur) var(--timing); }
+.radio-label-wrapper:hover { background: var(--radio-hover); transform: translateY(-1px); }
+.radio-custom { width:var(--radio-size); height:var(--radio-size); border-radius:50%; border: 1px solid var(--radio-border); display:inline-block; position:relative; flex:0 0 var(--radio-size); transition:all 160ms var(--timing); box-sizing:border-box; background:var(--radio-unchecked-bg); box-shadow: inset 0 1px 2px rgba(0,0,0,0.03); }
+.radio-custom::after { content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(0); width:calc(var(--radio-size) * 0.6); height:calc(var(--radio-size) * 0.6); border-radius:50%; background:var(--radio-checked-dot); transition:transform 160ms var(--timing); }
+
+/* checked state */
+.radio-input:checked + .radio-label-wrapper .radio-custom { background: var(--radio-checked-bg); border-color: transparent; }
+.radio-input:checked + .radio-label-wrapper .radio-custom::after { transform:translate(-50%,-50%) scale(1); }
+
+/* focus-visible */
+.radio-input:focus + .radio-label-wrapper { outline: 3px solid rgba(5,150,105,0.12); border-radius: 10px; }
+
+.radio-label { color: var(--text-main); font-weight:500 }
+
+@media (max-width:600px){ .radio-label-wrapper{ padding:6px; } }
+
+/* Overlay / modal animations remain but with palette tweaks */
+@keyframes modalFadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes modalPopIn { from { opacity: 0; transform: translateY(8px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+.modal-backdrop { animation: modalFadeIn 220ms var(--timing) forwards; }
+.modal-card { animation: modalPopIn 260ms cubic-bezier(.2,.9,.3,1) forwards; background: var(--surface-white); color: var(--text-main); border-radius: 12px; box-shadow: 0 12px 36px var(--warm-shadow); border: 1px solid rgba(var(--stone-border-rgba),0.06); }
+
+/* modal buttons */
+.modal-actions { display:flex; gap:12px; justify-content:center; margin-top:12px }
+.modal-primary { background: var(--primary-green); color:#fff; padding:10px 16px; border-radius:8px; border:none; cursor:pointer }
+.modal-secondary { background: #FAFAF9; color: var(--text-main); padding:10px 16px; border-radius:8px; border:1px solid rgba(var(--stone-border-rgba),0.12); cursor:pointer }
+
+/* Sticky progress bar styles updated */
+.progress-row {
+  position: fixed;
+  top: calc(var(--navbar-height, 64px) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--progress-text);
+  box-shadow: 0 4px 16px rgba(120, 113, 108, 0.12);
+  border-radius: 16px;
+  transition: box-shadow var(--dur) var(--timing), background var(--dur) var(--timing);
+  width: min(820px, calc(100% - 40px));
+  box-sizing: border-box;
+}
+
+.progress-info { font-size: 0.95rem; font-weight: 600; color: var(--text-main); }
+
+.progress { flex: 1 1 auto; height: 8px; background: rgba(0,0,0,0.08); border-radius: 999px; overflow: hidden; margin-left: 16px; margin-right: 8px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #06B6D4, #22D3EE); transition: width 260ms var(--timing); border-radius: 999px; }
+
+@media (max-width: 640px) { .progress-row { top: calc(var(--navbar-height, 64px) + 8px); padding: 8px 12px; width: calc(100% - 24px); } .progress-info { font-size: 0.9rem; } }
+
+/* small utilities for buttons inside modal - ensure consistent styling */
+.modal-primary, .modal-secondary { transition: transform var(--dur) var(--timing), box-shadow var(--dur) var(--timing); }
+.modal-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,150,105,0.12); }
+.modal-secondary:hover { background: #f3f3f2; }
+
+/* checkbox and scale styles: use surfaces and borders aligned to palette */
+.checkbox-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: #FAFAF9; border: 1px solid rgba(var(--stone-border-rgba),0.12); cursor: pointer; transition: background var(--dur) var(--timing), transform var(--dur) var(--timing), box-shadow var(--dur) var(--timing); font-size: 14px; position: relative; padding-left: 54px; }
+.checkbox-item .checkbox-text::before { left: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 6px; border: 1px solid rgba(var(--stone-border-rgba),0.12); background: #FAFAF9; }
+.checkbox-item input[type="checkbox"]:checked + .checkbox-text::before { background: var(--primary-green); border-color: transparent; }
+
+/* ensure accessible focus states */
+.radio-input:focus-visible + .radio-label-wrapper, .checkbox-item:focus-within { outline: 3px solid rgba(5,150,105,0.12); border-radius: 12px; }
+
+/* Enhanced form/input layout & visuals for Section1 */
+.questionnaire-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* ridotto da 18px a 12px */
+  width: 100%;
+}
+
+.questionnaire-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* ridotto da 8px a 6px */
+}
+
+.questionnaire-form .form-row label {
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+/* Uniform input controls - stile morbido e organico */
+.questionnaire-form input[type="number"],
+.questionnaire-form input[type="text"],
+.questionnaire-form textarea {
+  width: 100%;
+  height: 44px; /* ridotto da 52px a 44px */
+  padding: 10px 14px; /* ridotto da 14px 18px a 10px 14px */
+  border-radius: 12px; /* ridotto da 16px a 12px per proporzione */
+  border: 1px solid #E7E5E4; /* stone-200 - bordo sottile */
+  background: #FAFAF9; /* stone-50 - sabbia chiarissimo */
+  color: var(--text-main);
+  font-size: 15px;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03); /* ombra molto sottile di default */
+  transition: all var(--dur) var(--timing);
+}
+
+.questionnaire-form textarea {
+  height: auto;
+  min-height: 96px; /* ridotto da 108px a 96px */
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Focus: Smeraldo con ombra leggera, niente blu elettrico */
+.questionnaire-form input:focus,
+.questionnaire-form textarea:focus {
+  border-color: #059669; /* Smeraldo esplicito */
+  box-shadow: 0 0 0 3px rgba(5,150,105,0.10), 0 4px 12px rgba(5,150,105,0.08); /* Ring smeraldo + ombra leggera */
+  transform: translateY(-1px);
+  background: var(--surface-white); /* diventa bianco puro al focus */
+}
+
+/* Tidy legend and fieldset */
+.fieldset, fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.questionnaire-form fieldset.legended { margin-top: 6px; }
+
+.questionnaire-form legend {
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+/* Radio options: Card cliccabili con check icon */
+.radio-row { display:flex; gap:6px; flex-wrap:wrap; align-items:stretch; } /* ridotto gap a 6px */
+.radio-item { flex: 0 1 auto; /* lascia che si adatti al contenuto invece di forzare larghezza */ }
+
+/* La label diventa una card cliccabile */
+.radio-label-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* ridotto da 8px a 6px */
+  padding: 10px; /* ridotto padding orizzontale per compattezza */
+  width: 100%;
+  border-radius: 10px; /* ridotto da 12px a 10px */
+  background: var(--surface-white); /* sfondo bianco */
+  border: 2px solid #E7E5E4; /* bordo grigio chiaro (stone-200) */
+  cursor: pointer;
+  transition: all var(--dur) var(--timing);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04); /* ombra sottile */
+  position: relative;
+}
+
+/* Variante COMPATTA per bottoni Yes/No e Diet (vegano/vegetariano/no) */
+.radio-label-wrapper.compact,
+input[name="diet"] + .radio-label-wrapper,
+input[name="allergy"] + .radio-label-wrapper {
+  padding: 6px 12px; /* padding molto più piccolo */
+  border-radius: 8px; /* angoli più stretti */
+  gap: 4px;
+  min-width: auto; /* evita di allargare troppo */
+}
+
+input[name="diet"] + .radio-label-wrapper .radio-label,
+input[name="allergy"] + .radio-label-wrapper .radio-label {
+  font-size: 13px; /* font più piccolo */
+  font-weight: 500; /* meno grassetto */
+}
+
+/* Check icon più piccolo per compact */
+input[name="diet"]:checked + .radio-label-wrapper::after,
+input[name="allergy"]:checked + .radio-label-wrapper::after {
+  font-size: 14px; /* ridotto da 16px */
+  right: 8px;
+}
+
+/* Hover: leggero cambio di sfondo */
+.radio-label-wrapper:hover {
+  background: #FAFAF9; /* sabbia chiarissimo */
+  border-color: #D6D3D1; /* stone-300 */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Nascondi completamente il pallino radio custom */
+.radio-custom {
+  display: none; /* nascondi il cerchio personalizzato */
+}
+
+/* Il testo della label */
+.radio-label {
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 14px; /* ridotto da 15px a 14px */
+  flex: 1; /* prendi tutto lo spazio disponibile */
+}
+
+/* Icona Check - nascosta di default */
+.radio-label-wrapper::after {
+  content: '✓'; /* check mark */
+  position: absolute;
+  right: 10px; /* ridotto da 12px a 10px */
+  top: 50%;
+  transform: translateY(-50%) scale(0); /* nascosta di default */
+  font-size: 16px; /* ridotto da 18px a 16px per proporzione */
+  font-weight: 900;
+  color: #059669; /* smeraldo */
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1); /* bounce effect */
+}
+
+/* Stato SELEZIONATO: Card con sfondo verde menta chiarissimo + bordo smeraldo + check visibile */
+.radio-input:checked + .radio-label-wrapper {
+  background: #ECFDF5; /* Verde Menta Chiarissimo (emerald-50) */
+  border-color: #059669; /* Smeraldo Scuro - bordo 2px */
+  border-width: 2px;
+  box-shadow: 0 2px 8px rgba(5,150,105,0.12), 0 0 0 3px rgba(5,150,105,0.08); /* ombra + ring */
+  transform: translateY(-1px);
+}
+
+/* Check icon appare quando selezionato */
+.radio-input:checked + .radio-label-wrapper::after {
+  transform: translateY(-50%) scale(1); /* appare con bounce */
+}
+
+/* Il testo rimane scuro anche quando selezionato (migliore leggibilità su verde menta chiaro) */
+.radio-input:checked + .radio-label-wrapper .radio-label {
+  color: #065F46; /* verde scuro per contrasto su sfondo menta */
+  font-weight: 700;
+}
+
+/* keyboard focus */
+.radio-input:focus + .radio-label-wrapper {
+  outline: 3px solid rgba(5,150,105,0.12);
+  outline-offset: 2px;
+}
+
+/* Make sure errors align nicely */
+.error { margin-top: 6px; color: var(--danger-300); font-size: 13px; }
+
+/* Actions: keep button aligned to right on desktop, full width on mobile */
+.form-actions { display:flex; justify-content:flex-end; gap:12px; }
+.form-actions .btn-primary { min-width: 160px; }
+@media (max-width: 640px) {
+  .radio-item { flex: 1 1 100%; }
+  .form-actions { justify-content: center; }
+  .form-actions .btn-primary { width: 100%; }
+}
+
+/* ===== Scale Pills (Mai, Raramente, Qualche volta, Spesso, Sempre) ===== */
+.scale-pills {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.scale-pill {
+  /* Layout */
+  padding: 12px 16px;
+  border-radius: 999px; /* rounded-full - pillola perfetta */
+
+  /* Stato Default: Bianco con bordo stone-200 */
+  background: var(--surface-white);
+  border: 1px solid #E7E5E4; /* stone-200 */
+  color: #57534E; /* stone-600 - testo secondario */
+
+  /* Typography */
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+
+  /* Interazione */
+  cursor: pointer;
+  transition: all 280ms ease-out;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+
+  /* Reset button defaults */
+  outline: none;
+  border: 1px solid #E7E5E4;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Hover: leggero lift */
+.scale-pill:hover:not(.disabled) {
+  background: #FAFAF9; /* stone-50 */
+  border-color: #D6D3D1; /* stone-300 */
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+/* Stato SELEZIONATO: Verde Smeraldo con ombra emerald */
+.scale-pill.selected {
+  background: #059669; /* emerald-600 */
+  border-color: #059669;
+  color: #FFFFFF; /* testo bianco */
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2); /* shadow-md con tinta emerald */
+  transform: translateY(-1px);
+  font-weight: 600;
+}
+
+/* Hover su selezionato: intensifica leggermente */
+.scale-pill.selected:hover:not(.disabled) {
+  background: #047857; /* emerald-700 - leggermente più scuro */
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Disabled state */
+.scale-pill.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Focus visible per accessibilità */
+.scale-pill:focus-visible {
+  outline: 3px solid rgba(5, 150, 105, 0.12);
+  outline-offset: 2px;
+}
+
+/* Mobile: riduci padding per compattezza */
+@media (max-width: 640px) {
+  .scale-pills {
+    gap: 8px;
+  }
+
+  .scale-pill {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
+/* ===== Pulsanti di Paginazione (Avanti/Indietro) ===== */
+.pager-btn {
+  /* Layout */
+  padding: 10px 20px;
+  border-radius: 10px;
+
+  /* Stile BASE: Verde Smeraldo con scritta bianca (per "Avanti") */
+  background: #059669; /* emerald-600 */
+  border: none;
+  color: #FFFFFF;
+
+  /* Typography */
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+
+  /* Interazione */
+  cursor: pointer;
+  transition: all 280ms ease-out;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.15);
+
+  /* Reset button defaults */
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Hover: intensifica il verde e lift (per "Avanti") */
+.pager-btn:hover {
+  background: #047857; /* emerald-700 */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+}
+
+/* Active/Press: leggero affondamento */
+.pager-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(5, 150, 105, 0.2);
+}
+
+/* Focus visible per accessibilità */
+.pager-btn:focus-visible {
+  outline: 3px solid rgba(5, 150, 105, 0.3);
+  outline-offset: 2px;
+}
+
+/* ===== Pulsante INDIETRO: Stile Arancione Caldo (come Logout) ===== */
+.pager-btn.pager-back {
+  /* Arancione caldo chiaro */
+  background: #FED7AA; /* orange-200 */
+  border: 1px solid #C2410C; /* orange-700 */
+  color: #C2410C; /* orange-700 - testo arancione scuro */
+  box-shadow: 0 2px 6px rgba(194, 65, 12, 0.15);
+}
+
+/* Hover per "Indietro": arancione più intenso */
+.pager-btn.pager-back:hover {
+  background: #FDBA74; /* orange-300 */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(194, 65, 12, 0.25);
+}
+
+/* Active per "Indietro" */
+.pager-btn.pager-back:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(194, 65, 12, 0.2);
+}
+
+/* Focus per "Indietro" */
+.pager-btn.pager-back:focus-visible {
+  outline: 3px solid rgba(194, 65, 12, 0.3);
+  outline-offset: 2px;
+}
+
+/* ===== Pulsante .btn-secondary: Stile Arancione Caldo (coerente con Indietro) ===== */
+.btn-secondary {
+  /* Arancione caldo chiaro */
+  background: #FED7AA; /* orange-200 */
+  border: 1px solid #C2410C; /* orange-700 */
+  color: #C2410C; /* orange-700 - testo arancione scuro */
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 300ms ease-out;
+  box-shadow: 0 2px 6px rgba(194, 65, 12, 0.15);
+}
+
+/* Hover per .btn-secondary */
+.btn-secondary:hover {
+  background: #FDBA74; /* orange-300 */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(194, 65, 12, 0.25);
+}
+
+/* Active per .btn-secondary */
+.btn-secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(194, 65, 12, 0.2);
+}
+
+/* Focus per .btn-secondary */
+.btn-secondary:focus-visible {
+  outline: 3px solid rgba(194, 65, 12, 0.3);
+  outline-offset: 2px;
+}
+
+/* Disabled state per .btn-secondary */
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===== Pulsante Principale "Torna nella sezione precedente" - Extra Visibile ===== */
+.btn-back-main {
+  /* Override base .btn-secondary per renderlo più prominente */
+  padding: 14px 28px !important; /* Più grande */
+  font-size: 16px !important; /* Font più grande */
+  font-weight: 700 !important; /* Più grassetto */
+  background: #FDBA74 !important; /* Arancione più intenso di default */
+  border: 2px solid #C2410C !important; /* Bordo più spesso */
+  box-shadow: 0 4px 12px rgba(194, 65, 12, 0.25) !important; /* Ombra più pronunciata */
+  letter-spacing: 0.3px; /* Spaziatura lettere per leggibilità */
+}
+
+/* Hover per .btn-back-main - ancora più evidente */
+.btn-back-main:hover {
+  background: #FB923C !important; /* orange-400 - ancora più intenso */
+  transform: translateY(-3px) !important; /* Lift maggiore */
+  box-shadow: 0 6px 20px rgba(194, 65, 12, 0.35) !important; /* Ombra più forte */
+  border-color: #9A3412 !important; /* orange-800 - bordo più scuro */
+}
+
+/* Active per .btn-back-main */
+.btn-back-main:active {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 10px rgba(194, 65, 12, 0.3) !important;
+}
+
+/* Focus per .btn-back-main */
+.btn-back-main:focus-visible {
+  outline: 4px solid rgba(194, 65, 12, 0.4) !important; /* Ring più spesso */
+  outline-offset: 3px;
+}
+
+/* Mobile: mantieni dimensioni generose anche su mobile */
+@media (max-width: 640px) {
+  .btn-back-main {
+    padding: 12px 24px !important;
+    font-size: 15px !important;
+    width: 100%; /* Full width su mobile per massima visibilità */
+  }
+}
+
+/* Stili per il container dei pulsanti pager */
+.section-pager {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #E7E5E4; /* stone-200 */
+}
+
+.pager-info {
+  text-align: center;
+  font-size: 13px;
+  color: #57534E; /* stone-600 */
+  font-weight: 500;
+}
+
+.pager-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Mobile: stack pulsanti e riduci padding */
+@media (max-width: 640px) {
+  .pager-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .pager-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .pager-btn {
+    width: 100%;
+  }
+}
+
+/* ===== Multi-Select Grid (Condizioni mediche, Disturbi del sonno) ===== */
+.multi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonne */
+  gap: 8px; /* gap ridotto per compattezza */
+  margin-top: 8px;
+}
+
+/* Checkbox compatte per multi-select */
+.multi-grid .checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* ridotto da 12px */
+  padding: 8px 10px; /* ridotto da 12px 14px */
+  border-radius: 8px; /* ridotto da 12px */
+  background: #FAFAF9; /* stone-50 */
+  border: 1px solid #E7E5E4; /* stone-200 */
+  cursor: pointer;
+  transition: all 280ms ease-out;
+  font-size: 13px; /* ridotto da 14px */
+  position: relative;
+  min-height: 38px; /* altezza minima per consistenza */
+}
+
+/* Checkbox input nascosto */
+.multi-grid .checkbox-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Checkbox text con pseudo-elemento per il quadratino */
+.multi-grid .checkbox-item .checkbox-text {
+  flex: 1;
+  color: var(--text-main);
+  font-weight: 500;
+  line-height: 1.4;
+  padding-left: 28px; /* spazio per il checkbox custom */
+  position: relative;
+}
+
+/* Quadratino checkbox custom */
+.multi-grid .checkbox-item .checkbox-text::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px; /* ridotto da 20px */
+  height: 18px;
+  border-radius: 4px; /* ridotto da 6px */
+  border: 1.5px solid #D6D3D1; /* stone-300 */
+  background: #FFFFFF;
+  transition: all 280ms ease-out;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+/* Checkmark (✓) quando selezionato */
+.multi-grid .checkbox-item .checkbox-text::after {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px; /* ridotto da 14px */
+  font-weight: 900;
+  color: #FFFFFF;
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1); /* bounce */
+}
+
+/* Stato CHECKED: sfondo verde smeraldo */
+.multi-grid .checkbox-item input[type="checkbox"]:checked + .checkbox-text::before {
+  background: #059669; /* emerald-600 */
+  border-color: #059669;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.15);
+}
+
+/* Checkmark appare con bounce */
+.multi-grid .checkbox-item input[type="checkbox"]:checked + .checkbox-text::after {
+  transform: translateY(-50%) scale(1);
+}
+
+/* Hover: leggero lift */
+.multi-grid .checkbox-item:hover {
+  background: #FFFFFF; /* bianco puro */
+  border-color: #D6D3D1; /* stone-300 */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Focus-visible per accessibilità */
+.multi-grid .checkbox-item:focus-within {
+  outline: 3px solid rgba(5, 150, 105, 0.12);
+  outline-offset: 2px;
+}
+
+/* Mobile: stack a 1 colonna */
+@media (max-width: 640px) {
+  .multi-grid {
+    grid-template-columns: 1fr; /* 1 colonna su mobile */
+    gap: 6px;
+  }
+
+  .multi-grid .checkbox-item {
+    padding: 8px;
+    font-size: 12px;
+    min-height: 36px;
+  }
+
+  .multi-grid .checkbox-item .checkbox-text::before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .multi-grid .checkbox-item .checkbox-text::after {
+    width: 16px;
+    height: 16px;
+    font-size: 11px;
+  }
+
+  .multi-grid .checkbox-item .checkbox-text {
+    padding-left: 24px;
+  }
+}
+
+/* ========================================
+   MICRO-SURVEY STYLES (Section3)
+   ======================================== */
+
+/* Container per il micro-survey */
+.micro-survey {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+  background: var(--surface-white); /* Bianco puro */
+  border-radius: 16px;
+  border: 1px solid rgba(var(--stone-border-rgba), 0.08);
+  box-shadow: 0 4px 12px var(--warm-shadow); /* Ombra calda e diffusa */
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* Titolo del micro-survey */
+.micro-survey h5 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main); /* Terra Scura */
+  margin: 0 0 8px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #ECFDF5; /* Verde menta chiarissimo - divisore elegante */
+}
+
+/* Testo hint (small-muted) */
+.micro-survey .small-muted,
+.small-muted {
+  font-size: 13px;
+  color: var(--text-secondary); /* #57534E - Grigio Caldo */
+  font-style: italic;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+/* Label per le domande del micro-survey */
+.micro-survey label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* Select dropdown nel micro-survey */
+.micro-survey select {
+  width: 100%;
+  height: 48px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #E7E5E4; /* stone-200 - bordo sottile */
+  background: #FAFAF9; /* stone-50 - sabbia chiarissimo */
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  transition: all 300ms ease-out;
+  appearance: none; /* Rimuovi stile nativo */
+  /* Aggiungi freccia personalizzata */
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2357534E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  padding-right: 40px; /* Spazio per la freccia */
+}
+
+/* Hover state per select */
+.micro-survey select:hover {
+  background-color: #FFFFFF; /* Bianco puro */
+  border-color: #D6D3D1; /* stone-300 */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Focus state per select - Ring Verde Smeraldo */
+.micro-survey select:focus {
+  border-color: #059669; /* Smeraldo */
+  background-color: var(--surface-white);
+  box-shadow: 0 0 0 3px rgba(5,150,105,0.12), 0 4px 12px rgba(5,150,105,0.10);
+  transform: translateY(-1px);
+}
+
+/* Opzioni del select */
+.micro-survey select option {
+  padding: 12px;
+  background: var(--surface-white);
+  color: var(--text-main);
+}
+
+.micro-survey select option[value=""] {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Messaggio di errore nel micro-survey */
+.micro-survey .error {
+  font-size: 13px;
+  color: #DC2626; /* Rosso per errori */
+  background: #FEE2E2; /* Sfondo rosso chiarissimo */
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 3px solid #DC2626;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 640px) {
+  .micro-survey {
+    padding: 18px 16px;
+    gap: 14px;
+    border-radius: 12px;
+  }
+
+  .micro-survey h5 {
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
+
+  .micro-survey .small-muted {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .micro-survey label {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .micro-survey select {
+    height: 44px;
+    padding: 10px 14px;
+    font-size: 14px;
+    padding-right: 36px;
+    background-size: 18px;
+  }
+
+  .micro-survey .error {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+

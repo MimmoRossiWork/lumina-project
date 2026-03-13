@@ -1,0 +1,6 @@
+.section6-critical { max-width:900px; margin:0 auto; padding:24px; background: var(--surface-white); border-radius:16px; border:1px solid rgba(var(--stone-border-rgba), 0.08); box-shadow: 0 8px 24px var(--warm-shadow); color: var(--text-main) }
+.section6-critical .form-row{ display:flex; gap:16px; align-items:center; margin:12px 0 }
+.section6-critical .question-label{ flex:1; color:var(--text-main); font-weight:700 }
+.section6-critical .section-intro{ color: var(--text-secondary); margin-bottom:12px }
+.section6-critical .form-actions{ display:flex; justify-content:space-between; margin-top:18px }
+.section6-critical .error{ color:#DC2626; margin-top:8px; background:#FEE2E2; padding:8px 12px; border-radius:8px; border-left:3px solid #DC2626 }

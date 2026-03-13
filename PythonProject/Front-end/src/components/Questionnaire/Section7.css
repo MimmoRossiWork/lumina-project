@@ -1,0 +1,15 @@
+/* Stili per Section7 */
+.section7 .form-row { margin-bottom: 12px; }
+.section7 .question-label { font-size: 15px; }
+.section7 .small-muted { color: rgba(255,255,255,0.7); }
+
+@media (min-width: 900px) {
+  .section7 .events-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+}
+
+@media (max-width: 899px) {
+  .section7 .events-grid { display: block; }
+}
+
+.section7 .form-actions { margin-top: 16px; }
+

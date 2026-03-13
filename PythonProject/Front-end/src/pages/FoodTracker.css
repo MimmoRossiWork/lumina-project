@@ -1,0 +1,816 @@
+/* Design system variables (copiate da FitTracker.css) - permettono di forzare testo scuro e palette coerente */
+:root {
+  --bg-warm: #F5E6D3;
+  --surface-white: #FFFFFF;
+  --primary-green: #059669;
+  --accent-500: var(--primary-green);
+  --text-dark: #292524;
+  --text-secondary: #57534E;
+  --input-bg: #FAFAF9;
+  --border-light: rgba(87, 83, 78, 0.15);
+  --placeholder-color: #A8A29E;
+  --radius-card: 24px;
+  --radius-input: 12px;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+/* Override principale per rendere i testi neri e adottare lo stile card/inputs di FitTracker */
+.food-root {
+  /* manteniamo le regole esistenti ma forziamo colore e sfondo coerenti */
+  background-color: var(--bg-warm);
+  color: var(--text-dark); /* testi neri */
+  font-family: var(--font-sans), sans-serif; /* aggiunta fallback generico per il linter */
+  --text-color: var(--text-dark); /* assicurati che le variabili esistenti usino il testo scuro */
+}
+
+/* Card chiare come in FitTracker */
+.food-root .card {
+  background-color: var(--surface-white) !important;
+  color: var(--text-dark) !important;
+  border-radius: var(--radius-card);
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(120, 113, 108, 0.15), 0 4px 12px rgba(120, 113, 108, 0.08);
+  border: 1px solid var(--border-light);
+}
+
+/* Titoli e testi principali neri */
+.food-root .card-title,
+.food-root .food-total,
+.food-root .entry-name,
+.food-root .entry-cal,
+.food-root .goal-info,
+.food-root .progress-pct,
+.food-root .macro-text,
+.food-root .meal-legend .legend-name,
+.food-root .macro-legend .legend-name {
+  color: var(--text-dark) !important;
+}
+
+/* Input / select stile chiaro e testo nero */
+.food-root .field input[type="text"],
+.food-root .field input[type="number"],
+.food-root .field select {
+  color: var(--text-dark) !important;
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-input) !important;
+  box-shadow: 0 2px 8px rgba(41, 37, 36, 0.06) !important;
+}
+
+.food-root .field input::placeholder {
+  color: var(--placeholder-color) !important;
+  opacity: 0.7 !important;
+}
+
+.food-root .field input:focus, .food-root .field select:focus {
+  border-color: var(--primary-green) !important;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.08) !important;
+  background-color: var(--surface-white) !important;
+  color: var(--text-dark) !important;
+  outline: none !important;
+}
+
+/* Pulsanti: primaria verde e testo bianco (come FitTracker) */
+.food-root .btn.primary {
+  background: linear-gradient(90deg,var(--primary-green), #10b981) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* Forziamo placeholder e voci suggerite scure dove necessario */
+.food-root .suggestions li,
+.food-root .field select option {
+  color: var(--text-dark) !important;
+  background: var(--surface-white) !important;
+}
+
+/* Ensure autocomplete and suggestions contrast on white background */
+.food-root .suggestions {
+  background: var(--surface-white) !important;
+  border: 1px solid var(--border-light) !important;
+  color: var(--text-dark) !important;
+}
+
+/* Stile coerente con il resto del sito: usa classi card e btn già presenti nel progetto */
+.food-root {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 980px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto 80px;
+  color: var(--text-color);
+}
+
+/* ensure all children measure with box-sizing so padding doesn't cause overflow */
+.food-root *,
+.food-root *::before,
+.food-root *::after {
+  box-sizing: inherit;
+}
+
+.food-header h1 {
+  margin: 0 0 6px 0;
+  font-size: 1.6rem;
+}
+.food-sub {
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 12px;
+}
+
+.tip {
+  margin: 8px 0 14px;
+  color: var(--accent-500);
+  font-size: 0.95rem;
+}
+
+.food-main {
+  display: grid;
+  /* make the right column responsive: min width then expand up to 360px */
+  grid-template-columns: 1fr minmax(280px, 360px);
+  gap: 18px;
+  align-items: start;
+}
+
+.card {
+  /* scuro e traslucido per integrarsi con il background globale */
+  background: rgba(11,18,38,0.6); /* scuro semitrasparente */
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  color: var(--text-color);
+  border: 1px solid rgba(255,255,255,0.04);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.food-input-card {
+  margin: 0 auto; /* centra orizzontalmente */
+  width: 100%;
+  max-width: 880px; /* limita larghezza massima del blocco di inserimento */
+  overflow: visible; /* importante: permettere alla dropdown di uscire dal card senza essere ritagliata */
+  z-index: 80; /* mettiamo sopra il contenuto normale */
+}
+
+.food-input-card .food-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field span { display: block; margin-bottom: 6px; color: var(--primary-700); }
+/* Style inputs and selects for dark theme - override native select appearance */
+.field input[type="text"], .field input[type="number"] {
+  color: var(--text-color);
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 1rem;
+  background: rgba(255,255,255,0.02);
+  min-width: 0;
+}
+.field select {
+  /* keep consistent with inputs visually */
+  color: var(--text-color);
+  padding: 8px 10px;
+  padding-right: 36px; /* room for custom caret */
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 1rem;
+  background: rgba(255,255,255,0.02);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  min-width: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+}
+/* Hide IE/Edge default arrow */
+.field select::-ms-expand { display: none; }
+
+.field input::placeholder { color: rgba(255,255,255,0.5); }
+
+/* Style native option elements (modern browsers respect this) */
+.field select option,
+.suggestions li {
+  background: rgba(7,17,34,0.95);
+  color: var(--text-color);
+}
+
+/* Force select + option dark styling with higher specificity and fallbacks */
+.food-root .field select {
+  background-color: rgba(255,255,255,0.02) !important;
+  color: var(--text-color) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") !important;
+}
+
+/* Try to style option elements; some browsers limit styling but this helps where supported */
+.food-root .field select option,
+.food-root .field select optgroup {
+  background-color: rgba(7,17,34,0.95) !important;
+  color: var(--text-color) !important;
+}
+
+/* For Chrome on Windows the dropdown uses a native UI that may ignore option styles.
+   Provide a strong fallback: when the select is focused, show a small popup-like list in absolute positioned layer (for modern browsers not using native picker).
+   This is a progressive enhancement; for full control implement a JS custom select component if needed. */
+
+/* Ensure the caret remains visible on dark bg */
+.food-root .field select {
+  background-position: right 10px center !important;
+  background-size: 14px !important;
+}
+
+/* Improve accessibility: focus ring visible on dark */
+.food-root .field select:focus {
+  box-shadow: 0 6px 18px rgba(var(--primary-500-rgb), 0.16) !important;
+  border-color: rgba(var(--primary-400-rgb), 0.95) !important;
+}
+
+.field input[type="text"]:focus, .field select:focus {
+  outline: none;
+  box-shadow: 0 6px 18px rgba(var(--primary-500-rgb), 0.12);
+  border-color: rgba(var(--primary-400-rgb), 0.9);
+}
+
+.macro-row { display:flex; gap:8px }
+.field.small { flex:1 }
+
+.food-form-actions { display: flex; gap: 8px; margin-top: 6px; }
+.btn { padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(var(--primary-500-rgb),0.08); background: transparent; cursor: pointer; color: var(--text-color); }
+.btn.primary { background: linear-gradient(90deg,var(--primary-500),var(--primary-400)); color: white; border: none; }
+.btn.small { padding: 6px 8px; font-size: 0.85rem; }
+
+.food-summary { text-align: center; }
+.card-title { font-weight: 600; margin-bottom: 8px; color: var(--text-color); }
+.food-total { font-size: 1.8rem; font-weight: 700; color: var(--text-color); }
+
+.food-diary { grid-column: 1 / -1; min-height: 200px; }
+.food-diary .entries { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.entry {
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+  display:block
+}
+.entry-main { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px }
+.entry-name { font-weight: 700; color: var(--text-color) }
+.entry-cal { color: var(--accent-500); font-weight:700 }
+.entry-desc { color: rgba(255,255,255,0.75); font-size: 0.95rem; margin-bottom: 8px }
+.entry-meta { display:flex; gap:8px; justify-content:space-between; align-items:center }
+.entry-side { text-align:right }
+.entry-meal { font-size: 0.85rem; color: rgba(255,255,255,0.65) }
+.entry-macros { color: rgba(255,255,255,0.65); font-size: 0.9rem }
+
+/* Category colors */
+.entry.healthy { border-left: 6px solid rgba(22,163,74,0.95); background: rgba(16,185,129,0.06); }
+.entry.limit { border-left: 6px solid rgba(249,115,22,0.95); background: rgba(249,115,22,0.06); }
+.entry.processed { border-left: 6px solid rgba(245,158,11,0.95); background: rgba(245,158,11,0.06); }
+.entry.neutral { border-left: 6px solid rgba(148,163,184,0.95); background: rgba(148,163,184,0.04); }
+
+.empty { color: #6b7280; padding: 12px }
+
+/* Autocomplete suggestions */
+.autocomplete-wrap { position: relative; width: 100%; z-index: 40; }
+.suggestions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 80;
+  background: rgba(7,17,34,0.95);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 8px;
+  margin-top: 6px;
+  max-height: 200px;
+  overflow: auto;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+}
+.suggestions li { padding: 8px 10px; cursor: pointer; color: var(--text-color); }
+.suggestions li:hover { background: rgba(255,255,255,0.03); }
+
+/* Progress bar */
+.progress-wrap { margin-top: 8px }
+.progress-bar {
+  background: rgba(255,255,255,0.04);
+  height: 12px; border-radius: 999px; overflow: hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg,var(--primary-500),var(--primary-400));
+  transition: width 360ms cubic-bezier(.2,.9,.3,1);
+  box-shadow: 0 6px 20px rgba(46,139,139,0.18);
+}
+.progress-fill.over { box-shadow: 0 0 0 3px rgba(249,115,22,0.08); border-radius: 999px }
+.progress-pct { margin-top: 6px; font-weight:600; color: var(--text-color) }
+.goal-row { display:flex; justify-content:space-between; align-items:center; gap:8px }
+.goal-info { font-weight:700; color: var(--text-color); }
+.goal-edit input { width: 100px; padding:6px 8px; border-radius:8px }
+
+.macros-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  align-items: flex-start;
+}
+.macros-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.macro-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(2,6,23,0.32);
+  border: 1px solid rgba(255,255,255,0.06);
+  flex: 0 0 12px;
+}
+.macro-text { color: var(--text-color); font-size: 0.92rem }
+
+/* Water tracker */
+.water-tracker { margin-top: 12px }
+.water-title { font-weight:600; margin-bottom:8px }
+.water-glasses { display:flex; gap:8px }
+/* Rendiamo le "glass" più visibili: contorno nero e ombra leggera, testo/scarso di default scuro */
+.water-glasses .glass,
+.glass {
+  width:36px; /* aumenta area di tocco */
+  height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  border: 1px solid var(--text-dark); /* contorno nero/scuro */
+  background: transparent;
+  cursor:pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, color 180ms ease;
+  color: var(--text-dark); /* icona contorno scuro */
+  padding:6px; /* lascia spazio all'SVG */
+  box-shadow: 0 6px 18px rgba(41,37,36,0.06); /* ombra leggera */
+}
+.glass svg { width:24px; height:28px; display:block }
+.glass .cup-outline { stroke: currentColor; }
+.glass .cup-liquid { fill: currentColor; opacity: 0; transition: opacity 180ms ease, transform 180ms ease }
+.glass:focus { outline: none; box-shadow: 0 0 0 3px rgba(41,37,36,0.08); border-radius: 10px }
+.glass:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(41,37,36,0.08); }
+.glass.filled {
+  color: #60a5fa; /* primary blue */
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(41,37,36,0.10);
+}
+.glass.filled .cup-liquid { opacity: 1; }
+/* Ensure adequate hit-area on mobile */
+@media (pointer: coarse) {
+  .glass { width:44px; height:52px; padding:8px }
+}
+
+/* Progress bar (water) - contorno scuro e ombra leggera per visibilità */
+.water-bar { height: 10px; background: rgba(255,255,255,0.03); border-radius: 999px; overflow: hidden; margin-top: 8px; border: 1px solid var(--text-dark); box-shadow: 0 6px 18px rgba(41,37,36,0.06); }
+
+/* Chart */
+.chart-wrap { width: 100%; min-height: 140px; height: auto; }
+
+/* Chart - support for three columns layout */
+.chart-wrap.three-cols {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  flex-wrap: nowrap; /* force horizontal alignment */
+  overflow-x: auto; /* allow horizontal scroll on narrow viewports */
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px; /* spacing for scrollbar */
+  scroll-snap-type: x mandatory; /* snap to charts */
+}
+.chart-box {
+  flex: 0 0 calc(33.333% - 12px); /* fixed third of the visible area */
+  min-width: 300px; /* ensure charts remain readable */
+  max-width: 420px; /* limit overly wide boxes */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  position: relative; /* ensure absolute children positioned relative to box */
+  scroll-snap-align: center;
+}
+
+/* make scrollbar unobtrusive */
+.chart-wrap.three-cols::-webkit-scrollbar { height: 10px }
+.chart-wrap.three-cols::-webkit-scrollbar-track { background: transparent }
+.chart-wrap.three-cols::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 999px }
+
+/* Smooth resize animations for charts */
+.chart-box {
+  transition: flex-basis 360ms cubic-bezier(.2,.9,.3,1), width 360ms cubic-bezier(.2,.9,.3,1), transform 360ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease;
+}
+.chart-wrapper { transition: height 360ms cubic-bezier(.2,.9,.3,1), padding 260ms ease; }
+.chart-box svg, .chart-box canvas { transition: transform 360ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease, height 360ms ease; }
+.chart-center { transition: transform 360ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease; }
+
+/* responsive breakpoints: 3 cols -> 2 cols -> 1 col */
+@media (max-width: 1100px) {
+  .chart-box { flex: 1 1 calc(50% - 12px); }
+  .food-chart { --food-chart-height: 320px; }
+}
+@media (max-width: 720px) {
+  /* keep horizontal layout on small screens but allow horizontal scroll; adjust band height */
+  .chart-box { flex: 0 0 320px; min-width: 260px; }
+  .food-chart { --food-chart-height: 420px; }
+  .chart-box { padding: 6px 0; }
+  .chart-center { top: 36%; }
+}
+@media (max-width: 880px) {
+  .food-main { grid-template-columns: 1fr; }
+  .goal-row { flex-direction:column; align-items:flex-start }
+  .food-root { padding: 14px }
+  /* Mantieni layout orizzontale dei grafici: usa overflow-x per viewport stretti */
+  .chart-wrap.three-cols { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px }
+  .chart-box { min-width: 220px }
+}
+
+/* subtle hover scale to give interactive feedback on charts */
+.chart-box:hover { transform: translateY(-3px); }
+.chart-box:active { transform: translateY(0); }
+
+/* Ensure legends wrap nicely under tight widths */
+.meal-legend, .macro-legend { flex-wrap: wrap; }
+
+/* Meal legend (next to meals chart) */
+.meal-legend { display: flex; flex-direction: column; gap: 8px; margin-top: 6px }
+.meal-legend-item { display:flex; align-items:center; gap:10px; padding:6px; border-radius:8px }
+.meal-legend-item .dot { width:14px; height:14px; border-radius:50% }
+.meal-legend-item.active { background: linear-gradient(90deg, rgba(96,165,250,0.06), rgba(52,211,153,0.04)); }
+.macro-legend-item.active { background: linear-gradient(90deg, rgba(96,165,250,0.06), rgba(52,211,153,0.04)); }
+
+/* Make legend items keyboard-focusable and visible */
+.meal-legend-item:focus, .macro-legend-item:focus, .meal-legend-item[tabindex]:focus, .macro-legend-item[tabindex]:focus {
+  outline: 2px solid rgba(96,165,250,0.12);
+  box-shadow: 0 6px 18px rgba(96,165,250,0.06);
+}
+
+/* make legend text slightly smaller on compact screens to avoid overlapping pies */
+@media (max-width: 520px) {
+  .meal-legend .legend-name, .macro-legend .legend-name { font-size: 0.9rem }
+  .meal-legend .legend-value, .macro-legend .legend-value { font-size: 0.78rem }
+}
+
+/* Water goal edit area */
+.water-goal-edit { margin-top: 8px; display:flex; justify-content: center }
+.water-goal-edit input { width: 80px; padding:6px; border-radius:6px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color: var(--text-color) }
+
+/* Slightly smaller legend text for compactness */
+.legend-text .legend-name { font-size: 0.95rem }
+.legend-text .legend-value { font-size: 0.85rem }
+
+/* Layout input: allinea alimento e controlli quantità/grammi e adatta meglio ai breakpoint */
+.food-input-row {
+  display: grid;
+  grid-template-columns: minmax(230px, 1fr) 150px 130px;
+  gap: 12px;
+  align-items: end;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .food-input-row { grid-template-columns: minmax(280px, 1fr) 170px 140px; gap: 14px; }
+}
+@media (min-width: 720px) and (max-width: 1023px) {
+  .food-input-row { grid-template-columns: minmax(220px, 1fr) 150px 130px; }
+}
+@media (max-width: 719px) {
+  .food-input-row { grid-template-columns: 1fr; gap: 10px; }
+  .food-input-row .qty-grams-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .food-input-row .grams-field { min-width: 0; max-width: none; width: 100%; }
+}
+.food-input-row .qty-grams-row { display: contents; }
+.food-input-row .field { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; margin: 0; }
+.food-input-row .field span { margin-bottom: 4px; align-self: flex-start; color: var(--text-dark); font-weight: 600; }
+.food-input-row .qty-field .stepper { display: flex; gap: 8px; align-items: center; justify-content: flex-start; }
+.food-input-row .qty-field .stepper input { width: 64px; min-width: 56px; text-align: center; }
+.food-input-row .grams-field { min-width: 100px; max-width: 140px; }
+.food-input-row .grams-field input { width: 100%; min-width: 100px; }
+.food-input-row .field input { min-width: 0; }
+.food-input-row .stepper input { min-width: 40px; }
+
+/* Assicuriamo che i bottoni stepper non escano dal contenitore */
+.stepper-btn { box-sizing: border-box; }
+
+/* Keep autocomplete suggestions above other elements */
+.autocomplete-wrap { position: relative; width: 100%; z-index: 40; }
+.suggestions { z-index: 80; }
+
+/* Ensure compact fields don't stretch vertically on small screens */
+.qty-grams-row .field.small { display: flex; flex-direction: column; justify-content: flex-end; }
+
+/* Tweak gram input min width so it doesn't collapse */
+.food-input-row .field small input, .qty-grams-row .field.small input { min-width: 72px; }
+
+/* Small visual polish for labels on that row */
+.food-input-row .field span { color: rgba(255,255,255,0.75); }
+
+/* Responsive: on narrow screens stack the inputs */
+@media (max-width: 720px) {
+  .food-input-row { flex-direction: column; align-items: stretch }
+  .qty-grams-row { width: 100%; flex-wrap: wrap }
+  .qty-grams-row .field.small { flex: 1 1 48% }
+  .stepper input { width: 56px }
+}
+
+@media (max-width: 880px) {
+  .food-main { grid-template-columns: 1fr; }
+  .goal-row { flex-direction:column; align-items:flex-start }
+  .food-root { padding: 14px }
+  /* Mantieni layout orizzontale dei grafici: usa overflow-x per viewport stretti */
+  .chart-wrap.three-cols { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px }
+  .chart-box { min-width: 220px }
+}
+
+/* Miglioramenti layout blocco inserimento: allinea Alimento | Quantità | Grammi */
+.food-root .food-input-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 140px 120px; /* mantiene la griglia desktop */
+  gap: 12px;
+  align-items: end; /* allinea gli elementi in basso per avere inputs su stessa linea */
+  width: 100%;
+}
+
+/* Assicuriamo che le label .field usino tutta l'altezza e che lo span sia posizionato correttamente */
+.food-root .food-input-row .field {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* spinge label e input verso il basso per allineare baseline */
+  gap: 6px;
+  margin: 0; /* rimuovi margini che rompevano l'allineamento */
+}
+
+.food-root .food-input-row .field span {
+  margin-bottom: 6px;
+  align-self: flex-start;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Stepper: pulsanti -/+ con bordo sottile scuro e simboli neri */
+.food-root .qty-field .stepper,
+.food-root .qty-field .stepper .stepper-btn,
+.food-root .stepper-btn {
+  align-items: center;
+  display: inline-flex;
+}
+
+.food-root .qty-field .stepper .stepper-btn,
+.food-root .food-input-row .stepper-btn {
+  background: var(--surface-white); /* bianco */
+  border: 1px solid rgba(41,37,36,0.12); /* contorno nero leggero */
+  color: var(--text-dark); /* simbolo scuro */
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(41,37,36,0.04);
+}
+
+/* simboli dentro i pulsanti -/+ neri e centrati */
+.food-root .qty-field .stepper .stepper-symbol,
+.food-root .food-input-row .stepper-symbol {
+  color: var(--text-dark) !important;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Hover / active leggeri per i pulsanti stepper */
+.food-root .qty-field .stepper .stepper-btn:hover,
+.food-root .food-input-row .stepper-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(41,37,36,0.06);
+}
+.food-root .qty-field .stepper .stepper-btn:active,
+.food-root .food-input-row .stepper-btn:active {
+  transform: translateY(0);
+}
+
+/* Fix input width in stepper to avoid overflow and keep alignment */
+.food-root .qty-field .stepper input[type="text"],
+.food-root .food-input-row .stepper input[type="text"] {
+  width: 56px;
+  min-width: 40px;
+  text-align: center;
+  padding: 8px 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  background: var(--input-bg);
+  color: var(--text-dark);
+}
+
+/* Grammi field alignment */
+.food-root .grams-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.food-root .grams-field input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  background: var(--input-bg);
+  color: var(--text-dark);
+}
+
+/* Water card a tutta larghezza sotto il diario */
+.water-card { grid-column: 1 / -1; width: 100%; }
+.water-wrap { width: 100%; }
+
+/* Griglia grafici: full width, card larghe come prima (min 380px) e allineate in alto */
+.food-charts-grid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin-top: 10px;
+}
+@media (max-width: 900px) { .food-charts-grid { grid-template-columns: 1fr; } }
+.chart-card { min-height: 240px; }
+
+/* Legende e card interne chiare e leggibili (ripristina ombre e bordo per i grafici) */
+.card .chart-card {
+  box-shadow: 0 8px 24px rgba(41,37,36,0.06);
+  border: 1px solid rgba(41,37,36,0.12);
+  background: var(--surface-white);
+  color: var(--text-dark);
+}
+
+/* Fine aggiornamenti layout acqua + grafici */
+
+/* Pulizia: mantieni anteprima coerente con testo nero e accento verde (override inline rimossi) */
+.preview-card {
+  margin-top: 8px;
+  background: var(--surface-white);
+  color: var(--text-dark);
+  border: 1px solid rgba(41,37,36,0.12);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 8px 30px rgba(41,37,36,0.06);
+}
+.preview-card .preview-left { font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+.preview-card .preview-body { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.preview-card .preview-item { color: var(--text-dark); opacity: 0.95; font-weight: 700; }
+.preview-card .preview-kcal { color: var(--accent-500); font-weight: 800; font-size: 1.05rem; }
+
+
+/* Legende e card interne chiare e leggibili */
+.meal-legend-item, .macro-legend-item { background: var(--surface-white); border: 1px solid rgba(41,37,36,0.06); color: var(--text-dark); }
+.entry, .card .chart-card { background: var(--surface-white); color: var(--text-dark); border: 1px solid rgba(41,37,36,0.06); }
+
+/* Acqua: contorno e ombra già definiti sulle .glass; mantieni container neutro */
+.water-tracker, .water-chart-wrap { background: transparent; }
+
+/* Custom select pasto: bordo leggermente più sottile, sfondo bianco, testo scuro */
+.food-root .custom-select .custom-select-trigger,
+.food-root.fit-root .custom-select .custom-select-trigger {
+  background: var(--surface-white) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid rgba(41,37,36,0.08) !important;
+  box-shadow: 0 6px 18px rgba(41,37,36,0.04) !important;
+}
+.food-root .custom-options,
+.food-root.fit-root .custom-options {
+  background: var(--surface-white) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid rgba(41,37,36,0.07) !important;
+  box-shadow: 0 18px 48px rgba(41,37,36,0.06) !important;
+}
+
+/* Stepper -/+ bordi sottili e simboli neri, coerenti col tema chiaro */
+.food-root .qty-field .stepper .stepper-btn,
+.food-root .food-input-row .stepper-btn {
+  background: var(--surface-white);
+  border: 1px solid rgba(41,37,36,0.12);
+  color: var(--text-dark);
+  box-shadow: 0 4px 10px rgba(41,37,36,0.04);
+}
+.food-root .qty-field .stepper .stepper-symbol,
+.food-root .food-input-row .stepper-symbol {
+  color: var(--text-dark) !important;
+}
+
+/* Pulsanti reset: bordo leggero e testo nero (non tocca la primaria) */
+.food-root .food-form-actions .btn:not(.primary),
+.food-root .food-summary .btn:not(.primary),
+.food-root .food-input-card .btn:not(.primary) {
+  border: 1px solid rgba(41,37,36,0.12) !important;
+  color: var(--text-dark) !important;
+  background: var(--surface-white) !important;
+  box-shadow: 0 4px 10px rgba(41,37,36,0.04) !important;
+}
+.food-root .food-form-actions .btn:not(.primary):hover,
+.food-root .food-summary .btn:not(.primary):hover,
+.food-root .food-input-card .btn:not(.primary):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(41,37,36,0.06) !important;
+}
+
+/* Pulsanti reset versione nera (forza con specificità e gestisce lo stato disabled) */
+.food-root .btn.reset-btn {
+  background: #0b0b0b !important;
+  color: #ffffff !important;
+  border: 1px solid #0b0b0b !important;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18) !important;
+  padding: 8px 10px !important;
+}
+.food-root .btn.reset-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.22) !important;
+}
+.food-root .btn.reset-btn:active:not(:disabled) { transform: translateY(0); }
+
+/* Stronger overrides for specific containers to beat previous !important rules */
+.food-root .food-form-actions .btn.reset-btn,
+.food-root .food-summary .btn.reset-btn,
+.food-root .food-input-card .btn.reset-btn,
+.food-root .water-card .btn.reset-btn,
+.food-root .water-wrap .btn.reset-btn {
+  background: #0b0b0b !important;
+  color: #ffffff !important;
+  border: 1px solid #0b0b0b !important;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18) !important;
+}
+.food-root .food-form-actions .btn.reset-btn:hover:not(:disabled),
+.food-root .food-summary .btn.reset-btn:hover:not(:disabled),
+.food-root .food-input-card .btn.reset-btn:hover:not(:disabled),
+.food-root .water-card .btn.reset-btn:hover:not(:disabled),
+.food-root .water-wrap .btn.reset-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.22) !important;
+}
+.food-root .food-form-actions .btn.reset-btn[disabled],
+.food-root .food-summary .btn.reset-btn[disabled],
+.food-root .food-input-card .btn.reset-btn[disabled],
+.food-root .water-card .btn.reset-btn[disabled],
+.food-root .water-wrap .btn.reset-btn[disabled] {
+  background: #0b0b0b !important;
+  color: #ffffff !important;
+  border-color: #0b0b0b !important;
+  opacity: 1 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* Stronger overrides for specific containers to beat previous !important rules */
+.food-root .food-form-actions .btn.reset-btn[disabled],
+.food-root .food-summary .btn.reset-btn[disabled],
+.food-root .food-input-card .btn.reset-btn[disabled],
+.food-root .water-card .btn.reset-btn[disabled],
+.food-root .water-wrap .btn.reset-btn[disabled] {
+  background: #0b0b0b !important;
+  color: #ffffff !important;
+  border-color: #0b0b0b !important;
+  opacity: 1 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* History recap styles */
+.history-table {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+.history-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 0.8fr;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(41,37,36,0.08);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--text-dark);
+}
+.history-row:nth-child(2n+1) { background: #f9fafb; }
+.history-header {
+  background: #f3f4f6;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  border: 1px solid rgba(41,37,36,0.08);
+}
+.history-row > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.history-food-chip { padding: 3px 7px; background: #eef2f7; border: 1px solid rgba(41,37,36,0.08); border-radius: 999px; font-size: 12px; color: var(--text-dark); }
+.history-calories { font-weight: 600; }
+.history-water { color: var(--text-dark); }

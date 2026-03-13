@@ -1,0 +1,45 @@
+:root {
+  --site-gray-50: #fafafa;
+  --site-gray-100: #f3f4f6;
+  --site-muted: #6b7280;
+  --site-primary: #2563eb; /* blu-ish, adjust if site uses different */
+}
+
+.input {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-size: 1rem;
+  color: #111827;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* Soft variant: rounded, subtle background, no visible border */
+.soft {
+  background: var(--site-gray-100);
+  border: none;
+  border-radius: 1rem; /* rounded-2xl */
+  padding: 0.75rem 1.25rem; /* py-3 px-5 approx */
+  transition: box-shadow 200ms ease, transform 120ms ease;
+  box-shadow: none;
+}
+.soft::placeholder { color: var(--site-muted); }
+.soft:focus {
+  box-shadow: 0 6px 18px rgba(37,99,235,0.08), 0 0 0 4px rgba(37,99,235,0.06);
+}
+
+/* Underline variant: transparent background, only bottom border */
+.underline {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(107,114,128,0.35);
+  padding: 0.75rem 0; /* generous vertical padding, zero horizontal */
+}
+.underline::placeholder { color: rgba(107,114,128,0.6); }
+.underline:focus {
+  border-bottom: 2px solid var(--site-primary);
+}
+
+/* small utility for disabled */
+.input:disabled { opacity: 0.6; }
+

@@ -1,0 +1,15 @@
+/* Stili per Section6 */
+.section6 .form-row { margin-bottom: 12px; }
+.section6 .question-label { font-size: 15px; }
+.section6 .small-muted { color: rgba(255,255,255,0.7); }
+
+@media (min-width: 900px) {
+  .section6 .support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+}
+
+@media (max-width: 899px) {
+  .section6 .support-grid { display: block; }
+}
+
+.section6 .form-actions { margin-top: 16px; }
+

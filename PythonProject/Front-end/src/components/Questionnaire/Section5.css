@@ -1,0 +1,24 @@
+/* Styles specifici per Section5, mantiene lo stesso tema scuro del Questionario */
+.section5 .form-row { margin-bottom: 12px; }
+.section5 .question-label { font-size: 15px; }
+.section5 .micro-note { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+
+/* miglioriamo il layout delle due colonne per le domande health vs chronic */
+@media (min-width: 900px) {
+  .section5 .health-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 899px) {
+  .section5 .health-grid { display: block; }
+}
+
+/* affinamenti per select/radio/textarea all'interno di section5 */
+.section5 input[type="text"],
+.section5 textarea { background: rgba(255,255,255,0.02); color: #fff; border: 1px solid rgba(255,255,255,0.06); padding: 8px; border-radius: 8px; }
+
+.section5 .form-actions { margin-top: 16px; }
+

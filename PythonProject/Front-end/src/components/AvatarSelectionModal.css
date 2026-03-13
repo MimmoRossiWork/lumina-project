@@ -1,0 +1,49 @@
+.avatar-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: grid;
+  place-items: center;
+  z-index: 1200;
+  padding: 16px;
+}
+.avatar-modal {
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  width: min(540px, 100%);
+  color: #e5e7eb;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+.avatar-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 0 18px;
+}
+.avatar-modal-body { padding: 14px 18px 18px 18px; display: flex; flex-direction: column; gap: 12px; }
+.avatar-large { width: 140px; height: 140px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); align-self: center; }
+.avatar-large img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-hint { margin: 0; color: #cbd5e1; text-align: center; font-size: 14px; }
+.avatar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 10px; }
+.avatar-thumb { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; padding: 0; background: transparent; cursor: pointer; position: relative; }
+.avatar-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avatar-thumb.selected { outline: 2px solid #2563eb; border-color: #2563eb; }
+.avatar-actions { display: flex; align-items: center; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+.avatar-error { color: #fca5a5; font-weight: 600; }
+.icon-btn { background: transparent; border: none; color: #e5e7eb; cursor: pointer; }
+.btn-primary { background: linear-gradient(135deg, #2563eb, #5b21b6); color: #fff; border: none; padding: 10px 14px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+.btn-secondary { background: transparent; color: #e5e7eb; border: 1px solid rgba(255,255,255,0.15); padding: 10px 14px; border-radius: 10px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.btn-primary:disabled, .btn-secondary:disabled { opacity: 0.6; cursor: not-allowed; }
+.avatar-filters { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.filter-btn {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.04);
+  color: #e5e7eb;
+  cursor: pointer;
+  font-weight: 600;
+}
+.filter-btn.active { background: rgba(37,99,235,0.25); border-color: rgba(37,99,235,0.5); }
+.filter-btn:hover { background: rgba(255,255,255,0.08); }
