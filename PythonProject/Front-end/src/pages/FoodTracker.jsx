@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 import WaterTracker from '../components/FoodTracker/WaterTracker'
 import { AuthContext } from '../AuthContext'
 
-const API_BASE = import.meta?.env?.VITE_API_BASE || 'http://127.0.0.1:8000'
+const API_BASE = import.meta?.env?.VITE_API_BASE || 'https://lumina-project-b1a9.onrender.com'
 
 const STORAGE_KEY = 'foodtracker_entries'
 const STORAGE_GOAL = 'foodtracker_goal'

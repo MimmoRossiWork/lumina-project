@@ -12,7 +12,7 @@ export default function Login() {
   const { setUser } = useContext(AuthContext)
 
   // Read API base URL from Vite env; fallback to local backend
-  const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+  const API_BASE = import.meta.env.VITE_API_URL || 'https://lumina-project-b1a9.onrender.com'
 
   async function handleSubmit(e) {
     e.preventDefault()

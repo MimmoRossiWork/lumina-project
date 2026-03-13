@@ -90,7 +90,7 @@ function CheckInCard({ title, type = 'mood', onAnswer }) {
 
 export default function Home() {
   const { user } = useContext(AuthContext)
-  const API_BASE = import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+  const API_BASE = import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL || 'https://lumina-project-b1a9.onrender.com'
 
   // Usa la data locale (en-CA => YYYY-MM-DD) per evitare sfasamenti UTC
   const getTodayLocal = () => new Date().toLocaleDateString('en-CA')

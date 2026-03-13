@@ -1,7 +1,7 @@
 import json
 from urllib import request
 
-url = 'http://127.0.0.1:8000/api/v1/auth/register'
+url = 'https://lumina-project-b1a9.onrender.com'
 payload = {
     'name': 'AutoTest',
     'surname': 'Script',

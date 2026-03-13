@@ -3,7 +3,7 @@ import { Clock, Activity, Check } from 'lucide-react'
 import './FitTracker.css'
 import { AuthContext } from '../AuthContext'
 
-const API_BASE = import.meta?.env?.VITE_API_BASE || 'http://127.0.0.1:8000'
+const API_BASE = import.meta?.env?.VITE_API_BASE || 'https://lumina-project-b1a9.onrender.com'
 
 const ACTIVITY_META = {
   Corsa: { met: 10, message: "Ogni chilometro ti rende più forte della tua scusa migliore!" },

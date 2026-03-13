@@ -19,7 +19,7 @@ export default function ProfilePage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [showAvatarModal, setShowAvatarModal] = useState(false)
-  const API_BASE = useMemo(() => import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000', [])
+  const API_BASE = useMemo(() => import.meta.env.VITE_API_URL || 'https://lumina-project-b1a9.onrender.com', [])
 
   const handleOpenOverlay = () => {
     setShowOverlay(true)

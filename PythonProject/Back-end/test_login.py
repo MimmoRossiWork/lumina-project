@@ -1,6 +1,6 @@
 import requests
 
-url='http://127.0.0.1:8000/api/v1/auth/login'
+url='https://lumina-project-b1a9.onrender.com'
 tests=[
     ('autotest+py@example.com','strongpass123'),
     ('autotest+py@example.com','wrongpass'),

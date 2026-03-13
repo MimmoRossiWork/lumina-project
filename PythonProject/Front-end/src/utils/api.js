@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+const API_BASE = import.meta.env.VITE_API_URL || 'https://lumina-project-b1a9.onrender.com'
 
 export async function saveWellbeing(payload, debug = false) {
   const url = new URL(`${API_BASE}/api/v1/wellbeing/`)

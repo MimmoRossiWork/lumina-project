@@ -8,7 +8,7 @@ export default function Results() {
   const [modal, setModal] = useState({ open: false, key: null, payload: null })
   const [saveStatus, setSaveStatus] = useState({ loading: false, error: '', success: false })
   const { user, setUser, completeQuestionnaire } = useContext(AuthContext)
-  const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+  const API_BASE = import.meta.env.VITE_API_URL || 'https://lumina-project-b1a9.onrender.com'
 
   useEffect(() => {
     const summary = localStorage.getItem('questionnaire_results')
